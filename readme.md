@@ -1,15 +1,21 @@
 latex cheats and information
 
+# dependencies
+
 this contains submodules, so after clone you need:
 
     git submodule init
     git submodule update
 
-to get the submodules
+to get the submodules.
+
+this also depends on the following sty files:
 
 # how to install latex on ubuntu
 
-texlive-full has enormous size (1Gb+) and lots of packages
+texlive-full is a latex distribution: it packages lots of .sty files and utilities.
+
+it has enormous size (1Gb+) and lots of packages.
 
 this is the best works out of the box bet
 while ubuntu latex has no package manager (windows has one...)
@@ -17,34 +23,32 @@ while ubuntu latex has no package manager (windows has one...)
     #sudo aptitude install -y texlive
     sudo aptitude install -y texlive-full
 
+# sty search path
+
+for a single user first find:
+
+    kpsewhich -var-value=TEXMFHOME
+
+commonly `~/texmf/` in linux and then place the files as:
+
+`TEXMFHOME` is not an enviroment variable.
+
+next, you *must* use the following subdir structure.
+
+    `kpsewhich -var-value=TEXMFHOME`/tex/latex/NAME/NAME.sty
+
+AFAIK the the dirname must match the basename exactly, so you can only
+have one file per directory. TODO: confirm.
+
+and it may be necessary to update package database with:
+
+    sudo texhash
+
 # texmaker editor
 
 easy to user latex editor:
     
     sudo aptitude install -y texmaker
-
-# dirs
-
-* media: everything that is not a tex file, such as an image or table
-* _aux: auxiliary tex compilation files.
-* _out: output files such as pdf
-
-while using those two directories adds some complexity to compilation,
-they clear up the main dir so much that I decided to use them anyways
-
-# files
-
-## main.sty
-
-both cheatsheet and template for new projects
-
-## table.ods
-
-it is much easier to edit tables in [libreoffice](http://www.libreoffice.org/features/calc/)
-or other spreadsheet applications since its much easier to keep things alligned
-
-give a lable to every table, and then name the tables as label.ods so that 
-corresponding tables can be found afterwards for further editing
 
 # TODO
 
