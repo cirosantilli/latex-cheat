@@ -11,6 +11,11 @@ to get the submodules.
 
 this also depends on the following sty files:
 
+- https://github.com/cirosantilli/latex-shared-presentation-sty/tree/c5e44ed4677e644f360c9ff4c34dec85e326739c
+- https://github.com/cirosantilli/latex-shared-sty/tree/dafc1feef09056637c2b55e887bbdfbf90613158
+
+which you should put in your sty search path as explained in [sty-search-path](#sty-search-path)
+
 # how to install latex on ubuntu
 
 texlive-full is a latex distribution: it packages lots of .sty files and utilities.
