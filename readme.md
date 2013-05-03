@@ -9,10 +9,6 @@ this contains submodules, so after clone you need:
 
 to get the submodules.
 
-this also depends on the sty files contained in:
-
-- https://github.com/cirosantilli/latex-shared-sty/tree/1.0
-
 # how to install latex on ubuntu
 
 texlive-full is a latex distribution: it packages lots of .sty files and utilities.
