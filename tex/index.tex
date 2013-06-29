@@ -1,0 +1,519 @@
+\documentclass[12pt]{article}
+
+\title{latex cheatsheet}
+\author{author name}
+%\date{01/01/2000}                                                % if commented out, uses today's date
+
+\usepackage{shared}
+
+\usepackage[a4paper]{geometry}                        % A5 output. You should use this always for e reader users who have small screens (ereaders)
+%\usepackage[top=2in, bottom=1.5in, left=1in, right=1in]{geometry}    % set margins
+%\usepackage[margin=1in]{geometry}                                                                    % set all margins to the same value
+\usepackage[notref,notcite]{showkeys}         % shows labels. Use labels with at most 7 chars or you fall off pdf in A5 kindle friendly mode
+
+%TODO can this work??
+%\newcommand{\inOut}[1]{\begin{verbatim}#1\end{verbatim}#1} %CANT use verbatim here, give up, people will read at source for now!!!
+\newcommand{\inOut}[1]{#1}                                %dummy inOut before I can find a nice way to show source and output in one go.
+
+\begin{document}
+
+\tableofcontents
+\newpage
+
+%\begin{comment}
+\section{TODO}
+
+\begin{remark}
+    Put TODOs as the first \label{TODO2} thing for development so you don't forget to do them.
+
+    You may want to put those in order of urgency/difficulty here.
+
+    Mark TODO location in \label{TODO1} the middle of text with labels TODO, then explain them here.
+
+    Comment them out for release.
+\end{remark}
+
+\begin{itemize}
+    \item TODO2 deal with this TODO at all costs
+    \item TODO1 this TODO is not as important as the first one.
+    \item TODO3
+\end{itemize}
+%\begin{comment}
+
+\section{pdflatex}
+
+This section discusses operation of the pdflatex utility,
+which compiles latex files into pdfs.
+
+\subsection{environment variables}
+
+\begin{itemize}
+    \item TEXINPUTS: colon separated list of directories under which latex will search for all kinds of inputs,
+        including latex files and images.
+
+        Example:
+
+        \begin{lstlisting}
+            env TEXINPUTS=./media//:~/tex/:
+        \end{lstlisting}
+
+        note that:
+
+        \begin{itemize}
+
+            \item you can give paths relative to the current directory with a dot as in: \lstinline|./media//|
+
+            \item you can give paths relative the home dir with a tilde as in: \lstinline|~/tex/|
+
+            \item a double trailling slash as in \lstinline|./media//| means: search recursivelly under \lstinline|./media/|
+
+            \item a trailling colon at the end of the entire variable as in \lstinline|~/.tex/:| means:
+
+                append afterwards the default search path
+        \end{itemize}
+\end{itemize}
+
+\section{Title pages} \label{title-pages}
+
+    \maketitle
+    \newpage
+
+    %#complex title page
+    \begin{titlepage}
+        COMPLEX TITLE PAGE
+
+        PROMOTION 2009
+
+        DURAN SANTILLI Ciro
+
+        \vspace{40 mm}
+
+        \begin{center}
+
+        {\large RAPPORT DE STAGE DE RECHERCHE}\\[0.5cm]
+
+        \underline{ \large \bfseries \itshape Flatness in control systems}
+
+        \vspace{10 mm}
+
+        \underline{ \bfseries NON CONFIDENTIEL }
+
+        PUBLICATION
+
+        \end{center}
+
+        \vspace{40 mm}
+
+        \underline{Option} : Mathématiques apliquées
+
+        \underline{Champ de l'option} : Automatique et Contrôle
+
+        \vspace{5 mm}
+
+        INRIA Sophia Antipolis Méditerrané
+
+        2004 Route des Lucioles - BP93
+
+        06902 SOPHIA ANTIPOLIS Cedex France
+    \end{titlepage}
+
+    \newpage
+
+\section{Abstract} \label{abstract}
+
+    \begin{abstract}
+    \end{abstract}
+    \newpage
+
+\section{Symbols}\label{symbols}
+
+    \begin{itemize}
+        \item sharp: C\verb|#|
+
+        \item ellipsis:
+        \begin{itemize}
+            \item    \ldots - horizontally at bottom of line
+            \item    $\cdots$ - horizontally center of line (math mode only)
+            \item    $\ddots$ - diagonal (math mode only)
+            \item    $\vdots$ - vertical (math mode only)
+        \end{itemize}
+
+        \item international:
+
+            with \lstinline|\usepackage[utf8]{inputenc}|:
+
+            á à â ä
+
+            chinese does not work: %中文
+
+    \end{itemize}
+
+\section{Style}\label{style}
+
+    \begin{itemize}
+
+        \item {\Large Large brackets}
+        \item \begin{Large}Large environment\end{Large}
+
+            posisble sizes:
+            \begin{lstlisting}
+                \tiny
+                \scriptsize
+                \footnotesize
+                \small
+                \normalsize
+                \large
+                \Large
+                \LARGE
+                \huge
+                \Huge
+            \end{lstlisting}
+        \item \textbf{bold}
+        \item \textit{italics}
+        \item \underline{underline underline}
+        \item \uline{uline uline}. Requires \lstinline|\usepackage{ulem}|
+
+    \end{itemize}
+
+    \begin{center}
+        center
+
+        center
+    \end{center}
+
+    \begin{flushright}
+        right
+
+        right
+    \end{flushright}
+
+    vspace 1cm
+
+    \vspace{1cm}
+
+    vspace 1cm \\[1cm]
+
+    vspace 1cm
+
+\section{Sections}\label{secSec}
+
+    \subsection{Subsection}\label{secSsec}
+
+        \subsubsection{Subsubsection}\label{secSssec}
+
+            \paragraph{Paragraph}
+
+                \begin{remark} \label{rem-paragraph}
+                    Paragraph comes after subsubsection.
+
+                    To add a label and numbering to it, use:
+
+                    \begin{lstlisting}
+                        \setcounter{secnumdepth}{4}
+                    \end{lstlisting}
+
+                    To add it to the toc, use:
+
+                    \begin{lstlisting}
+                        \setcounter{tocdepth}{4}
+                    \end{lstlisting}
+
+                \end{remark}\hrule
+
+                \subparagraph{Subparagraph}
+
+                    \begin{remark} \label{rem-subparagraph}
+                        Subparagraph comes after paragraph.
+
+                        To add a label and numbering to it, use:
+
+                        \begin{lstlisting}
+                            \setcounter{secnumdepth}{5}
+                        \end{lstlisting}
+
+                        To add it to the toc, use:
+
+                        \begin{lstlisting}
+                            \setcounter{tocdepth}{5}
+                        \end{lstlisting}
+
+                    \end{remark}\hrule
+
+                    \subparagraph{Paragraph}
+
+                    \begin{remark} \label{paragraph}
+                        Paragraph comes after subsubsection.
+
+                        To add a label to it, use \setcounter{secnumdepth}{4}
+                    \end{remark}\hrule
+
+                    \begin{remark} \label{remSec1}
+                        With t
+
+                        If you feel the need to do so, try and split your current document into two.
+                    \end{remark}\hrule
+
+\section{Formulas}\label{secForm}
+
+    \begin{example}[Unumbered formula] \label{expFor2}
+        \inOut{
+            \begin{equation}\begin{aligned}\label{eqFor2}
+                \dot{x} = f(x,u)
+            \end{aligned}\end{equation}
+        }
+    \end{example}\hrule
+
+    \begin{example}[Numbered formula] \label{expFor1}
+        \inOut{
+            \begin{equation}\begin{aligned}\label{eqFor1}
+                \dot{x} = f(x,u)
+            \end{aligned}\end{equation}
+        }
+    \end{example}\hrule
+
+    \begin{remark}\label{remFor1} Why I use equation + aligned by default
+
+        There are simpler ways to write the equation such as backslash square brackets \textbackslash{}[\ldots\textbackslash{}],
+        but if you use those you will soon notice that you will waste a long time modifying equations
+        either to make them multiline, or to give them numbers, so it is just better to always use
+        equation + aligned unless you have a reason not to do so.
+    \end{remark}\hrule
+
+\subsection{Cases}\label{cases}
+
+    case function definition
+
+    \begin{equation}
+    f(x) =
+    \begin{cases}
+        x & x \le 0 \\
+        -x & x>0
+    \end{cases}
+    \end{equation}
+
+\section{Figures}\label{secTab}
+
+    figures, images, graphics
+
+    see figure \ref{fig-label}
+
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=5cm]{image.png}
+        \caption{caption here}
+        \label{fig-label}
+    \end{figure}
+
+    allowed formats:
+
+    \begin{itemize}
+        \item png
+        \item jpg
+    \end{itemize}
+
+    non-allowed formats:
+
+    \begin{itemize}
+        \item gif
+    \end{itemize}
+
+\section{Tables}\label{secTab}
+
+    \begin{example} \label{expTab1}
+        Table \ref{tab1} is a simple table. Note how it may have floated around, so I must refer to it as table \ref{tab1}.
+        \inOut{
+            \begin{table}[h]
+                \centering
+                \begin{tabular}{ccc}
+                    h1 & h2 & h3 \\
+                    \hline
+                    1 & 2 & 3 \\
+                    4 & 5 & 6 \\
+                    7 & 8 & 9 \\
+                \end{tabular}
+                \caption{caption}
+                \label{tab1}
+            \end{table}
+        }
+    \end{example}\hrule
+
+    \begin{remark} \label{remTab1}
+        The [h] means that the table should stay at current position (here) if possible, and not float around the page if possible.
+    \end{remark}\hrule
+
+    \begin{remark} \label{remTab2}
+        For complex tables with label LABEL, create a LABEL.ods spreadsheet with same name as the label and use it to make the table, then copy paste to the .tex.
+    \end{remark}\hrule
+
+    \begin{remark} \label{remTab3}
+        As with any other float (object that can change its position on the page to fit to content), always reference table labels when talking about tables, and never use expressions such as "the table" or "next table".
+    \end{remark}\hrule
+
+    \begin{example}[column formatting] \label{expTab2}
+        This is how you format individual table columns with \lstinline|\usepackage{array}|:
+        \inOut{
+            \begin{table}[h]
+                \centering
+                \begin{tabular}{    l c rp{1cm} p{1cm} >{\bf}c >{\it}c | c || c @{ abc } c c}
+                    1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
+                    1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
+                \end{tabular}
+            \end{table}
+        }
+    \end{example}\hrule
+
+    Line breaks in a table:
+
+    \begin{tabular}{ l l }
+        a & \begin{tabular}[t]{@{}l@{}} a \\ b \end{tabular} \\
+        \hline
+        a & \begin{tabular}[c]{@{}l@{}} a \\ b \end{tabular} \\
+        \hline
+        a & \begin{tabular}[b]{@{}l@{}} a \\ b \end{tabular} \\
+        \hline
+    \end{tabular}
+
+\section{Comments}\label{secCom}
+
+    \begin{example} \label{expCom1}
+        %\inOut{
+            Next line will be commented out, and therefore invisible to output.
+            \begin{comment}
+            This line was commented off.
+            \end{comment}
+        %}
+    \end{example}\hrule
+
+\section{Computer code}\label{secCode}
+
+    \begin{remark} \label{remCode1}
+        Use:
+        \begin{lstlisting}
+    \usepackage{lstlisting}
+        \end{lstlisting}
+    \end{remark}\hrule
+
+    \begin{example} \label{expLst1}
+        This is how you use it:
+        %\inOut{
+            \begin{lstlisting}
+    if i in is:
+            echo i
+    else:
+            echo -i
+            \end{lstlisting}
+        %}
+    \end{example}\hrule
+
+    \begin{example} \label{expLst2}
+        Inline listings:
+
+        %\inOut{
+            the function \lstinline|func_f(void a)| is useful
+        %}
+    \end{example}\hrule
+
+    \section{References}\label{secRef}
+
+    \begin{remark} \label{remLab1}
+        \textbackslash{}label refers to the smallest surrounding thing that is numbered, typically a section or a theorem environment. Therefore, if you simply put a label in a point paragraph, you don't normally get a link to that point of paragraph like you would in an html anchor.
+    \end{remark}\hrule
+
+    \begin{remark} \label{remLab2}
+        For url compatibility hyphen separation is a good idea: def-a-definition-was-here.
+    \end{remark}\hrule
+
+    \begin{example} \label{expRef1}
+        \inOut{
+            The next ref aims at this example.
+
+            Ref: \ref{expRef1}
+        }
+    \end{example}
+
+\section{Hyperlinks and urls}\label{hyperlinks-urls}
+
+    external links:
+
+    \url{http://www.wikibooks.org}
+
+    \href{http://www.wikibooks.org}{wikibooks home}
+
+    relative links:
+
+    \url{./index.pdf}
+
+    \href{./index.pdf}{link to index.pdf}
+
+    inner links in document:
+
+    \hypertarget{label}{target caption}
+
+    \hyperlink{label}{link caption}
+
+    \section{variables and conditional compilation}
+
+    \begin{lstlisting}
+        \def\mycmd{1}
+
+        \ifx\mycmd\undefined
+            undefed
+        \else
+            \if\mycmd1
+                defed, 1
+            \else
+                defed
+            \fi
+        \fi
+
+        \def\mycmd{0}
+
+        \ifx\mycmd\undefined
+            undefed
+        \else
+            \if\mycmd1
+                defed, 1
+            \else
+                defed
+            \fi
+        \fi
+    \end{lstlisting}
+
+\section{Quotations}\label{quotations}
+
+    From \cite{Aa00}:
+    \begin{quote}
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    \end{quote}
+
+    quotations:
+        for use with longer quotations, of more than one paragraph, because it indents the first line of each paragraph.
+
+    verse:
+        is for quotations where line breaks are important, such as poetry. Once in, new stanzas are created with a blank line, and new lines within a stanza are indicated using the newline command, \\. If a line takes up more than one line on the page, then all subsequent lines are indented until explicitly separated with \\.
+
+\section{Citations and bibliography}\label{secCit}
+
+    \begin{example} \label{expCite1}
+    \inOut{One \cite{Aa01} Two \cite{LL01}}
+    \end{example}\hrule
+
+    \begin{remark} \label{remCite1}
+        You have to cite a reference before it appears in the bibliography
+    \end{remark}\hrule
+
+    \begin{remark} \label{remCite2}
+        In the bibliography command, use the same name as your .bib file.
+    \end{remark}\hrule
+
+    \section{Bibliography}\label{secBib}
+    \newpage
+    \bibliography{index}
+
+\end{document}
