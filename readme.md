@@ -1,5 +1,7 @@
 latex cheats and information
 
+compiled output files found at: <http://cirosantilli.t15.org/latex-cheat/>
+
 # dependencies
 
 this contains submodules, so after clone you need:
