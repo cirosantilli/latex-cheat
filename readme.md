@@ -2,14 +2,9 @@ latex cheats and information
 
 compiled output files found at: <http://cirosantilli.t15.org/latex-cheat/>
 
-# dependencies
+this contains submodules, so clone with the recursive option:
 
-this contains submodules, so after clone you need:
-
-    git submodule init
-    git submodule update
-
-to get the submodules.
+    git clone --recursive https://github.com/cirosantilli/latex-cheat
 
 # how to install latex on ubuntu
 
