@@ -1,8 +1,11 @@
-latex cheats and information
+Cheats and information on latex.
 
-compiled output files found at: <http://cirosantilli.t15.org/latex-cheat/>
+Compiled output files found at: <http://cirosantilli.t15.org/latex-cheat/>
 
-this contains submodules, so clone with the recursive flags:
+If you are looking for a template, see <https://github.com/cirosantilli/latex-template>.
+It was used to make this repo.
+
+This contains submodules, so clone with the recursive flags:
 
     git clone --recursive https://github.com/cirosantilli/latex-cheat
 
@@ -13,14 +16,12 @@ and if you forgot it do afterwards:
 
 # how to install latex on ubuntu
 
-texlive-full is a latex distribution: it packages lots of .sty files and utilities.
+texlive is a latex distribution: it packages lots of .sty files and utilities.
 
-it has enormous size (1Gb+) and lots of packages.
+texlive-full is the name of the ubuntu repo for the texlive distro which contains the most packages.
+it has enormous size (1Gb+), but  this is the best works out-of-the-box bet
+while ubuntu latex has no package manager ( even windows miktex latex distro has one... )
 
-this is the best works out of the box bet
-while ubuntu latex has no package manager (windows has one...)
-
-    #sudo aptitude install -y texlive
     sudo aptitude install -y texlive-full
 
 # sty search path
@@ -77,7 +78,7 @@ that was a path for fonts which was extended to .sty files.
 # texmaker editor
 
 easy to user latex editor:
-    
+
     sudo aptitude install -y texmaker
 
 # TODO

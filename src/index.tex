@@ -23,55 +23,55 @@
 %\begin{comment}
 \section{TODO}
 
-\begin{remark}
-    Put TODOs as the first \label{TODO2} thing for development so you don't forget to do them.
+    \begin{remark}
+        Put TODOs as the first \label{TODO2} thing for development so you don't forget to do them.
 
-    You may want to put those in order of urgency/difficulty here.
+        You may want to put those in order of urgency/difficulty here.
 
-    Mark TODO location in \label{TODO1} the middle of text with labels TODO, then explain them here.
+        Mark TODO location in \label{TODO1} the middle of text with labels TODO, then explain them here.
 
-    Comment them out for release.
-\end{remark}
+        Comment them out for release.
+    \end{remark}
 
-\begin{itemize}
-    \item TODO2 deal with this TODO at all costs
-    \item TODO1 this TODO is not as important as the first one.
-    \item TODO3
-\end{itemize}
-%\begin{comment}
+    \begin{itemize}
+        \item TODO2 deal with this TODO at all costs
+        \item TODO1 this TODO is not as important as the first one.
+        \item TODO3
+    \end{itemize}
+    %\begin{comment}
 
 \section{pdflatex}
 
-This section discusses operation of the pdflatex utility,
-which compiles latex files into pdfs.
+    This section discusses operation of the pdflatex utility,
+    which compiles latex files into pdfs.
 
-\subsection{environment variables}
-
-\begin{itemize}
-    \item TEXINPUTS: colon separated list of directories under which latex will search for all kinds of inputs,
-        including latex files and images.
-
-        Example:
-
-        \begin{lstlisting}
-            env TEXINPUTS=./media//:~/tex/:
-        \end{lstlisting}
-
-        note that:
+    \subsection{environment variables}
 
         \begin{itemize}
+            \item TEXINPUTS: colon separated list of directories under which latex will search for all kinds of inputs,
+                including latex files and images.
 
-            \item you can give paths relative to the current directory with a dot as in: \lstinline|./media//|
+                Example:
 
-            \item you can give paths relative the home dir with a tilde as in: \lstinline|~/tex/|
+                \begin{lstlisting}
+                    env TEXINPUTS=./media//:~/tex/:
+                \end{lstlisting}
 
-            \item a double trailling slash as in \lstinline|./media//| means: search recursivelly under \lstinline|./media/|
+                note that:
 
-            \item a trailling colon at the end of the entire variable as in \lstinline|~/.tex/:| means:
+                \begin{itemize}
 
-                append afterwards the default search path
+                    \item you can give paths relative to the current directory with a dot as in: \lstinline|./media//|
+
+                    \item you can give paths relative the home dir with a tilde as in: \lstinline|~/tex/|
+
+                    \item a double trailling slash as in \lstinline|./media//| means: search recursivelly under \lstinline|./media/|
+
+                    \item a trailling colon at the end of the entire variable as in \lstinline|~/.tex/:| means:
+
+                        append afterwards the default search path
+                \end{itemize}
         \end{itemize}
-\end{itemize}
 
 \section{Title pages} \label{title-pages}
 
@@ -317,6 +317,27 @@ which compiles latex files into pdfs.
         \item gif
     \end{itemize}
 
+    You can append to the figure search apth with the package \lstinline|graphicx| and the command \lstinline|\graphicspath|:
+
+    \begin{lstlisting}
+        \usepackage{graphicx}
+
+        \graphicspath{ {./media/}{/usr/share/latex/img/} }
+    \end{lstlisting}
+
+    Relative paths are taken relative to current directory.
+
+    You can only use the \lstinline|\graphicspath| command once! Newer calls will erase the older ones.
+
+    Test media-gen:
+
+        \begin{figure}[htb]
+            \centering
+            \includegraphics[width=5cm]{media-gen.png}
+            \caption{caption here}
+            \label{fig-label}
+        \end{figure}
+
 \section{Tables}\label{secTab}
 
     \begin{example} \label{expTab1}
@@ -482,14 +503,15 @@ which compiles latex files into pdfs.
 \section{Quotations}\label{quotations}
 
     From \cite{Aa00}:
+
     \begin{quote}
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
     \end{quote}
 
     quotations:
