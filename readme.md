@@ -1,6 +1,6 @@
 Cheats and information on latex.
 
-Compiled output files found at: <http://cirosantilli.t15.org/latex-cheat/>
+Compiled output files found at: <http://cirosantilli.uphero.com/latex-cheat/>
 
 If you are looking for a template, see <https://github.com/cirosantilli/latex-template>.
 It was used to make this repo.

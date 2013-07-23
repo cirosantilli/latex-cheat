@@ -15,6 +15,8 @@
 %\newcommand{\inOut}[1]{\begin{verbatim}#1\end{verbatim}#1} %CANT use verbatim here, give up, people will read at source for now!!!
 \newcommand{\inOut}[1]{#1}                                %dummy inOut before I can find a nice way to show source and output in one go.
 
+\usepackage{pdfpages}
+
 \begin{document}
 
 \tableofcontents
@@ -337,6 +339,15 @@
 %            \caption{caption here}
 %            \label{fig-label}
 %        \end{figure}
+
+\section{Include external pdf}\label{extPdf}
+
+The following page shall be taken from an external pdf:
+
+\includepdf[pagecommand=\thispagestyle{plain}]{image.pdf}
+
+TODO: how to show the page number and make a label / hyperref to it?
+<http://tex.stackexchange.com/questions/25105/unable-to-link-to-inserted-pages-with-pdfpages>
 
 \section{Tables}\label{secTab}
 

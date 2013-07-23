@@ -1,3 +1,4 @@
 #http://freehostingnoads.net/
-FTP_HOST := cirosantilli.t15.org
-FTP_USER := u147220728
+FTP_HOST := cirosantilli.uphero.com
+FTP_USER := a8236295
+REMOTE_SUBDIR_PREF := public_html/
