@@ -258,19 +258,36 @@
 \section{Formulas}\label{secForm}
 
     \begin{example}[Unumbered formula] \label{expFor2}
+
         \inOut{
-            \begin{equation}\begin{aligned}\label{eqFor2}
+            \begin{equation*}\label{eqFor2}
                 \dot{x} = f(x,u)
-            \end{aligned}\end{equation}
+            \end{equation*}
         }
+
     \end{example}\hrule
 
     \begin{example}[Numbered formula] \label{expFor1}
+
         \inOut{
             \begin{equation}\begin{aligned}\label{eqFor1}
                 \dot{x} = f(x,u)
             \end{aligned}\end{equation}
         }
+
+    \end{example}\hrule
+
+    \begin{example}[Align at mulitple points] \label{alignMult}
+
+        Can be done with alignat:
+
+        \inOut{
+            \begin{alignat*}{3}
+                & a + b && = c      && = c2 \\
+                & d     && = e + f  && = f2
+            \end{alignat*}
+        }
+
     \end{example}\hrule
 
     \begin{remark}\label{remFor1} Why I use equation + aligned by default
@@ -279,6 +296,7 @@
         but if you use those you will soon notice that you will waste a long time modifying equations
         either to make them multiline, or to give them numbers, so it is just better to always use
         equation + aligned unless you have a reason not to do so.
+
     \end{remark}\hrule
 
 \subsection{Cases}\label{cases}
@@ -416,12 +434,12 @@ TODO: how to show the page number and make a label / hyperref to it?
         %}
     \end{example}\hrule
 
-\section{Computer code}\label{secCode}
+\section{Computer code}\label{code}
 
     \begin{remark} \label{remCode1}
         Use:
         \begin{lstlisting}
-    \usepackage{lstlisting}
+            \usepackage{lstlisting}
         \end{lstlisting}
     \end{remark}\hrule
 
@@ -429,10 +447,10 @@ TODO: how to show the page number and make a label / hyperref to it?
         This is how you use it:
         %\inOut{
             \begin{lstlisting}
-    if i in is:
-            echo i
-    else:
-            echo -i
+                if i in is:
+                        echo i
+                else:
+                        echo -i
             \end{lstlisting}
         %}
     \end{example}\hrule
@@ -445,7 +463,54 @@ TODO: how to show the page number and make a label / hyperref to it?
         %}
     \end{example}\hrule
 
-    \section{References}\label{secRef}
+    You can set properties for the entire document by using \lstinline|lstset| in the header.
+    Sample usage:
+
+    \begin{lstlisting}
+        \lstset{
+            %language=C,                             % Code langugage
+            basicstyle=\ttfamily,                   % Code font, Examples.
+            %commentstyle=\color{gray},              % Comments font
+            %numbers=left,                           % Line nums position
+            %numberstyle=\tiny,                      % Line-numbers fonts
+            %stepnumber=1,                           % Step between two line-numbers
+            %numbersep=5pt,                          % How far are line-numbers from code
+            %backgroundcolor=\color{lightlightgray}, % Choose background color
+            %frame=none,                             % A frame around the code
+            %tabsize=4,                              % Default tab size
+            %captionpos=b,                           % Caption-position = bottom
+            %breaklines=true,                        % Automatic line breaking?
+            %breakatwhitespace=false,                % Automatic breaks only at whitespace?
+            %showspaces=false,                       % Dont make spaces visible
+            %showtabs=false,                         % Dont make tabls visible
+            %columns=flexible,                       % Column format
+            %keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+            %morekeywords={__global__, __device__},  % CUDA specific keywords
+        }
+    \end{lstlisting}
+
+    Bad defaults which you should correct are:
+
+    \begin{itemize}
+
+        \item use the package \lstinline|upquote| so that quotation marks will appear
+            correctly as ASCII characters: \lstinline|"'`|
+
+        \item use the option \lstinline|basicstyle=\ttfamily| allows outputs monospace fonts:
+
+            \begin{lstlisting}
+                mmmmmmmmm
+                iiiiiiiii
+            \end{lstlisting}
+
+        \item Use the \lstinline|literate={~} {$\sim$}{1}| option so that ASCII tildes can be used.
+            \url{http://tex.stackexchange.com/questions/17266/how-to-insert-a-nice-tilde-in-a-lstlisting}
+
+        \item TODO how to copy paste correct code from PDF? paste is always full of spaces.
+
+    \end{itemize}
+
+\section{References}\label{secRef}
 
     \begin{remark} \label{remLab1}
         \textbackslash{}label refers to the smallest surrounding thing that is numbered, typically a section or a theorem environment. Therefore, if you simply put a label in a point paragraph, you don't normally get a link to that point of paragraph like you would in an html anchor.
@@ -531,10 +596,70 @@ TODO: how to show the page number and make a label / hyperref to it?
     verse:
         is for quotations where line breaks are important, such as poetry. Once in, new stanzas are created with a blank line, and new lines within a stanza are indicated using the newline command, \\. If a line takes up more than one line on the page, then all subsequent lines are indented until explicitly separated with \\.
 
+\section{Synctex}\label{synctex}
+
+    Allows forward and backward searches: give a tex line, and find the corresponding pdf page to view it or the inverese.
+
+    It is quite painful to use it sometimes, and the docs are not very good, but it is the only solution.
+
+    Usage:
+
+    \begin{lstlisting}
+        synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"
+    \end{lstlisting}
+
+    Concrete example:
+
+    \begin{lstlisting}
+        synctex "10:1:rel/path/to/a.tex" -o "path/rel/to/a.pdf"
+    \end{lstlisting}
+
+    Sample output (in case of success):
+
+    \begin{lstlisting}
+        This is SyncTeX command line utility, version 1.2
+        SyncTeX result begin
+        Output:_build/index.pdf
+        Page:8
+        x:155.464050
+        y:112.982956
+        h:89.292244
+        v:117.964276
+        W:416.691071
+        H:16.936472
+        before:
+        offset:0
+        middle:
+        after:
+        Output:_build/index.pdf
+        Page:8
+        x:75.942314
+        y:129.803223
+        h:32.863045
+        v:132.227466
+        W:46.068058
+        H:9.090909
+        before:
+        offset:0
+        middle:
+        after:
+        SyncTeX result end
+    \end{lstlisting}
+
+    You must then parse that output to get the value you want.
+    POSIX sh example of how to parse to get the page:
+
+    \begin{lstlisting}
+        SYNCTEX_OUT="`synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"`"
+        echo "SYNCTEX_OUT" | awk -F: '$1 ~/Page/ { print $2; exit }
+    \end{lstlisting}
+
 \section{Citations and bibliography}\label{secCit}
 
+    The bets way is to use bibtex.
+
     \begin{example} \label{expCite1}
-    \inOut{One \cite{Aa01} Two \cite{LL01}}
+        \inOut{One \cite{Aa01} Two \cite{LL01}}
     \end{example}\hrule
 
     \begin{remark} \label{remCite1}
