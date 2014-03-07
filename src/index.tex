@@ -142,11 +142,29 @@
 
         \item international:
 
-            with \lstinline|\usepackage[utf8]{inputenc}|:
+            With \lstinline|\usepackage[utf8]{inputenc}|:
 
             á à â ä
 
-            chinese does not work: %中文
+            Chinese does not work: %中文
+
+        \item Derivatives:
+
+           $$ \frac{dx(t)}{dt} $$
+           $$ \frac{\partial x(u,v)}{\partial u} $$
+
+       \item Vector arrow: $\vec{F}$
+
+        \item
+            Arrow with text above from amsmath:
+
+                $A\xrightarrow{x^2}B$
+
+            Arrow text above and below. \href{http://tex.stackexchange.com/questions/27545/custom-length-arrows-text-over-and-under}{Seems not to be on any package}:
+
+                $A\xxrightarrow{x^1}[x^2]{x^3}B$
+
+                $A\xxrightarrow{1000}{1}A$
 
     \end{itemize}
 
@@ -304,11 +322,11 @@
     case function definition
 
     \begin{equation}
-    f(x) =
-    \begin{cases}
-        x & x \le 0 \\
-        -x & x>0
-    \end{cases}
+        f(x) =
+        \begin{cases}
+            x & x \le 0 \\
+            -x & x>0
+        \end{cases}
     \end{equation}
 
 \section{Figures}\label{secTab}
@@ -656,7 +674,7 @@ TODO: how to show the page number and make a label / hyperref to it?
 
 \section{Citations and bibliography}\label{secCit}
 
-    The bets way is to use bibtex.
+    The best way is to use bibtex.
 
     \begin{example} \label{expCite1}
         \inOut{One \cite{Aa01} Two \cite{LL01}}
@@ -670,7 +688,8 @@ TODO: how to show the page number and make a label / hyperref to it?
         In the bibliography command, use the same name as your .bib file.
     \end{remark}\hrule
 
-    \section{Bibliography}\label{secBib}
+\section{Bibliography}\label{secBib}
+
     \newpage
     \bibliography{index}
 
