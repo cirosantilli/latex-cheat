@@ -8,7 +8,7 @@ cd install-tl-*
 echo i | sudo ./install-tl
 echo '
 # Texlive
-export PATH=$PATH:/usr/local/texlive/2013/bin/i386-linux
+export PATH=$PATH:/usr/local/texlive/2013/bin/'"$(uname -i)"'-linux
 export MANPATH=$MANPATH:/usr/local/texlive/2013/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2013/texmf-dist/doc/info
 ' >> ~/.profile

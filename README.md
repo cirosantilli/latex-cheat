@@ -15,17 +15,33 @@ and if you forgot it do afterwards:
 
 Most important files:
 
-- `src/index.tex`: main cheat.
+- [src/index.tex](src/index.tex): main cheat
 
-#Ubuntu install
+#distributions
 
-TeX Live is a LaTeX distribution: it packages lots of .sty files and utilities.
+The easiest way to get started with LaTeX is by using a distribution that packs up everything you need.
+
+Some distributions also come with a package manager which automatically downloads sty files as needed.
+
+##TeX Live
+
+Most common Linux distribution, also works on Windows and Mac OS X.
 
 `texlive-full` is the name of the Ubuntu repo for the TeX Live distro which contains the most packages.
 
 It has enormous size (1Gb+), but  this is the best works out-of-the-box bet while Ubuntu LaTeX has no package manager ( even windows miktex latex distro has one... ).
 
     sudo aptitude install -y texlive-full
+
+If you really want TeX Live 2013:
+
+    curl https://raw.github.com/cirosantilli/latex-cheat/master/install-texlive2013-ubuntu12.04.sh | bash 
+
+The source:
+
+    https://www.tug.org/svn/texlive/trunk/
+
+Seems to be the only way to determine what is in or not.
 
 #sty search path
 
