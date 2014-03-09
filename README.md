@@ -25,23 +25,34 @@ Some distributions also come with a package manager which automatically download
 
 ##TeX Live
 
-Most common Linux distribution, also works on Windows and Mac OS X.
+Most common Linux distribution and recommended on the [LaTeX website](http://latex-project.org/ftp.html). Also works on Windows and Mac OS X.
 
-`texlive-full` is the name of the Ubuntu repo for the TeX Live distro which contains the most packages.
+The main ways to install it are:
 
-It has enormous size (1Gb+), but  this is the best works out-of-the-box bet while Ubuntu LaTeX has no package manager ( even windows miktex latex distro has one... ).
+- download ISO: Our recommended method, which overcomes all the difficulties of the others.
 
-    sudo aptitude install -y texlive-full
+    This will do the full install:
 
-If you really want TeX Live 2013:
+        curl https://raw.github.com/cirosantilli/latex-cheat/master/install-texlive2013-ubuntu12.04.sh | bash 
 
-    curl https://raw.github.com/cirosantilli/latex-cheat/master/install-texlive2013-ubuntu12.04.sh | bash 
+    If you are doing it interactively, downloading via torrent which may be much faster (15 minutes vs 4 hours).
 
-The source:
+- a package manager. Easiest method, but on Ubuntu, installs 2009 version, which is too outdated.
+
+    `texlive-full` is the name of the Ubuntu repo for the TeX Live distro which contains the most packages.
+
+        sudo aptitude install -y texlive-full
+
+- `install-tl` script. Has worked for us, but:
+
+    - not very reliable, as it downloads packages one by one, and if one of them times out, the installation fails.
+    - not very reproducible, as it may download different package versions from each mirror.
+
+- from source at:
 
     https://www.tug.org/svn/texlive/trunk/
 
-Seems to be the only way to determine what is in or not.
+The full install takes 3-4 hours, ~ 2.5GB on the compressed ISO. Some install methods can install many packages which install only parts of TeX Live, but we think its not worth it: just get the entire package and save yourself future headaches with missing packages later on.
 
 #sty search path
 
