@@ -1,21 +1,27 @@
 \documentclass[12pt]{article}
 
-\title{latex cheatsheet}
+\title{LaTeX Cheatsheet}
 \author{author name}
-%\date{01/01/2000}                                                % if commented out, uses today's date
+%\date{01/01/2000}                        % if commented out, uses today's date
 
 \usepackage{shared}
 
-\usepackage[a4paper]{geometry}                        % A5 output. You should use this always for e reader users who have small screens (ereaders)
-%\usepackage[top=2in, bottom=1.5in, left=1in, right=1in]{geometry}    % set margins
-%\usepackage[margin=1in]{geometry}                                                                    % set all margins to the same value
-\usepackage[notref,notcite]{showkeys}         % shows labels. Use labels with at most 7 chars or you fall off pdf in A5 kindle friendly mode
+%\usepackage[top=2in, bottom=1.5in, left=1in, right=1in]{geometry}  % set margins
+%\usepackage[margin=1in]{geometry}                                  % set all margins to the same value
+
+\usepackage{boxedminipage}
+\usepackage[a4paper]{geometry}            % A5 output. You should use this always for e reader users who have small screens (ereaders)
+\usepackage{pdfpages}
+\usepackage[notref,notcite]{showkeys}     % shows labels. Use labels with at most 7 chars or you fall off pdf in A5 kindle friendly mode
+\usepackage{tabularx}         % Break line inside table cell: http://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+  % TODO get centering working
+  %\usepackage{ragged2e}       % Center all tabularx: http://tex.stackexchange.com/questions/89166/centering-in-tabularx-and-x-columns
+  %\renewcommand\tabularxcolumn[1]{>{\Centering}p{#1}}
+\usepackage{wrapfig}
 
 %TODO can this work??
 %\newcommand{\inOut}[1]{\begin{verbatim}#1\end{verbatim}#1} %CANT use verbatim here, give up, people will read at source for now!!!
-\newcommand{\inOut}[1]{#1}                                %dummy inOut before I can find a nice way to show source and output in one go.
-
-\usepackage{pdfpages}
+\newcommand{\inOut}[1]{#1}                %dummy inOut before I can find a nice way to show source and output in one go.
 
 \begin{document}
 
@@ -25,187 +31,278 @@
 %\begin{comment}
 \section{TODO}
 
-    \begin{remark}
-        Put TODOs as the first \label{TODO2} thing for development so you don't forget to do them.
+  \begin{remark}
+    Put TODOs as the first \label{TODO2} thing for development so you don't forget to do them.
 
-        You may want to put those in order of urgency/difficulty here.
+    You may want to put those in order of urgency/difficulty here.
 
-        Mark TODO location in \label{TODO1} the middle of text with labels TODO, then explain them here.
+    Mark TODO location in \label{TODO1} the middle of text with labels TODO, then explain them here.
 
-        Comment them out for release.
-    \end{remark}
+    Comment them out for release.
+  \end{remark}
 
-    \begin{itemize}
-        \item TODO2 deal with this TODO at all costs
-        \item TODO1 this TODO is not as important as the first one.
-        \item TODO3
-    \end{itemize}
-    %\begin{comment}
-
-\section{pdflatex}
-
-    This section discusses operation of the pdflatex utility,
-    which compiles latex files into pdfs.
-
-    \subsection{environment variables}
-
-        \begin{itemize}
-            \item TEXINPUTS: colon separated list of directories under which latex will search for all kinds of inputs,
-                including latex files and images.
-
-                Example:
-
-                \begin{lstlisting}
-                    env TEXINPUTS=./media//:~/tex/:
-                \end{lstlisting}
-
-                note that:
-
-                \begin{itemize}
-
-                    \item you can give paths relative to the current directory with a dot as in: \lstinline|./media//|
-
-                    \item you can give paths relative the home dir with a tilde as in: \lstinline|~/tex/|
-
-                    \item a double trailling slash as in \lstinline|./media//| means: search recursivelly under \lstinline|./media/|
-
-                    \item a trailling colon at the end of the entire variable as in \lstinline|~/.tex/:| means:
-
-                        append afterwards the default search path
-                \end{itemize}
-        \end{itemize}
+  \begin{itemize}
+    \item TODO2 deal with this TODO at all costs
+    \item TODO1 this TODO is not as important as the first one.
+    \item TODO3
+  \end{itemize}
+  %\begin{comment}
 
 \section{Title pages} \label{title-pages}
 
-    \maketitle
-    \newpage
+  \maketitle
+  \newpage
 
-    %#complex title page
-    \begin{titlepage}
-        COMPLEX TITLE PAGE
+  %#complex title page
+  \begin{titlepage}
+    COMPLEX TITLE PAGE
 
-        PROMOTION 2009
+    PROMOTION 2009
 
-        DURAN SANTILLI Ciro
+    DURAN SANTILLI Ciro
 
-        \vspace{40 mm}
+    \vspace{40 mm}
 
-        \begin{center}
+    \begin{center}
 
-        {\large RAPPORT DE STAGE DE RECHERCHE}\\[0.5cm]
+      {\large RAPPORT DE STAGE DE RECHERCHE}\\[0.5cm]
 
-        \underline{ \large \bfseries \itshape Flatness in control systems}
+      \underline{ \large \bfseries \itshape Flatness in control systems}
 
-        \vspace{10 mm}
+      \vspace{10 mm}
 
-        \underline{ \bfseries NON CONFIDENTIEL }
+      \underline{ \bfseries NON CONFIDENTIEL }
 
-        PUBLICATION
+      PUBLICATION
 
-        \end{center}
+    \end{center}
 
-        \vspace{40 mm}
+    \vspace{40 mm}
 
-        \underline{Option} : Mathématiques apliquées
+    \underline{Option} : Mathématiques apliquées
 
-        \underline{Champ de l'option} : Automatique et Contrôle
+    \underline{Champ de l'option} : Automatique et Contrôle
 
-        \vspace{5 mm}
+    \vspace{5 mm}
 
-        INRIA Sophia Antipolis Méditerrané
+    INRIA Sophia Antipolis Méditerrané
 
-        2004 Route des Lucioles - BP93
+    2004 Route des Lucioles - BP93
 
-        06902 SOPHIA ANTIPOLIS Cedex France
-    \end{titlepage}
+    06902 SOPHIA ANTIPOLIS Cedex France
+  \end{titlepage}
 
-    \newpage
+  \newpage
 
 \section{Abstract} \label{abstract}
 
-    \begin{abstract}
-    \end{abstract}
-    \newpage
+  \begin{abstract}
+    This attempts to cover every single feature of LaTeX to its minute details.
+
+    It is intended to work with the \href{https://www.tug.org/texlive/acquire-iso.html}{TeX Live 2013 full ISO} without any additional packages installed or updated.
+  \end{abstract}
+  \newpage
 
 \section{Symbols}\label{symbols}
 
+  \begin{itemize}
+
+    \item underscore:
+
+      verb: \verb|a_b|
+
+      Backslash: a\_b
+
+    \item sharp / hash / number sign:
+
+      verb: \verb|#|
+
+      Backslash: \#
+
+      TODO: what it the unescaped meaning?
+
+    \item tilde:
+
+      \url{http://tex.stackexchange.com/questions/9363/how-does-one-insert-a-backslash-or-a-tilde-into-latex}
+
+      Center the tilde vertically: \url{http://tex.stackexchange.com/questions/312/correctly-typesetting-a-tilde}
+
+      textasciitilde: Xx \textasciitilde
+
+      verb: \verb|~|
+
+      If unescaped, is a whitespace at which lines cannot break.
+
+      Without tilde:
+
+      mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn 
+
+      With tilde:
+
+      mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm~nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn 
+
+      Recommended before \lstinline|\ref| and object type: \lstinline|Table\ref{tab1}|.
+
+    \item ellipsis:
     \begin{itemize}
-        \item sharp: C\verb|#|
-
-        \item ellipsis:
-        \begin{itemize}
-            \item    \ldots - horizontally at bottom of line
-            \item    $\cdots$ - horizontally center of line (math mode only)
-            \item    $\ddots$ - diagonal (math mode only)
-            \item    $\vdots$ - vertical (math mode only)
-        \end{itemize}
-
-        \item international:
-
-            With \lstinline|\usepackage[utf8]{inputenc}|:
-
-            á à â ä
-
-            Chinese does not work: %中文
-
-        \item Derivatives:
-
-           $$ \frac{dx(t)}{dt} $$
-           $$ \frac{\partial x(u,v)}{\partial u} $$
-
-       \item Vector arrow: $\vec{F}$
-
-        \item
-            Arrow with text above from amsmath:
-
-                $A\xrightarrow{x^2}B$
-
-            Arrow text above and below. \href{http://tex.stackexchange.com/questions/27545/custom-length-arrows-text-over-and-under}{Seems not to be on any package}:
-
-                $A\xxrightarrow{x^1}[x^2]{x^3}B$
-
-                $A\xxrightarrow{1000}{1}A$
-
+      \item  \ldots   - horizontally at bottom of line
+      \item  $\cdots$ - horizontally center of line (math mode only)
+      \item  $\ddots$ - diagonal (math mode only)
+      \item  $\vdots$ - vertical (math mode only)
     \end{itemize}
 
-\section{Style}\label{style}
+    \item international:
 
-    \begin{itemize}
+      With \lstinline|\usepackage[utf8]{inputenc}|:
 
-        \item {\Large Large brackets}
-        \item \begin{Large}Large environment\end{Large}
+      á à â ä
 
-            posisble sizes:
-            \begin{lstlisting}
-                \tiny
-                \scriptsize
-                \footnotesize
-                \small
-                \normalsize
-                \large
-                \Large
-                \LARGE
-                \huge
-                \Huge
-            \end{lstlisting}
-        \item \textbf{bold}
-        \item \textit{italics}
-        \item \underline{underline underline}
-        \item \uline{uline uline}. Requires \lstinline|\usepackage{ulem}|
+      Chinese does not work: %中文
 
-    \end{itemize}
+    \item Derivatives:
 
-    \begin{center}
-        center
+      $$ \frac{dx(t)}{dt} $$
+      $$ \frac{\partial x(u,v)}{\partial u} $$
 
-        center
-    \end{center}
+    \item Vector arrow: $\vec{F}$
 
-    \begin{flushright}
-        right
+    \item
+      Arrow with text above from amsmath:
 
-        right
-    \end{flushright}
+        $A\xrightarrow{x^2}B$
+
+      Arrow text above and below. \href{http://tex.stackexchange.com/questions/27545/custom-length-arrows-text-over-and-under}{Seems not to be on any package}:
+
+        $A\xxrightarrow{x^1}[x^2]{x^3}B$
+
+        $A\xxrightarrow{1000}{1}A$
+  \end{itemize}
+
+\section{Font}\label{font}
+
+  \begin{itemize}
+    \item {\Large Large brackets}
+    \item
+      \begin{Large}begin large environment\end{Large}
+      {\Large large inside brackets}
+      Possible sizes:
+      \begin{lstlisting}
+        \tiny
+        \scriptsize
+        \footnotesize
+        \small
+        \normalsize
+        \large
+        \Large
+        \LARGE
+        \huge
+        \Huge
+      \end{lstlisting}
+
+      Arbitrary sizes are only possible for Type 1 fonts: \url{http://stackoverflow.com/questions/890127/how-to-set-latex-font-size-in-millimeter}
+      \url{http://en.wikipedia.org/wiki/PostScript_fonts#Font_type}
+    \item \textbf{textbf command}
+    \item {\bf bf brackets bold}
+    \item \textit{textit command}
+    \item {\it it}
+    \item {\it \bf it bf}
+    \item {\bf \it bf it}
+    \item \underline{underline underline}
+    \item \uline{uline uline}. Requires \lstinline|\usepackage{ulem}|
+  \end{itemize}
+
+\section{Sections}\label{sections}
+
+  \subsection{Subsection}\label{subsection}
+
+    \subsubsection{Subsubsection}\label{subsubsection}
+
+      \paragraph{Paragraph}\label{paragraph}
+
+          Paragraph comes after subsubsection.
+
+          To add a label and numbering to it, use:
+
+          \begin{lstlisting}
+            \setcounter{secnumdepth}{4}
+          \end{lstlisting}
+
+          To add it to the TOC use:
+
+          \begin{lstlisting}
+            \setcounter{tocdepth}{4}
+          \end{lstlisting}
+
+        \subparagraph{Subparagraph}\label{subparagraph}
+
+          Subparagraph comes after paragraph.
+
+          To add a label and numbering to it, use:
+
+          \begin{lstlisting}
+            \setcounter{secnumdepth}{5}
+          \end{lstlisting}
+
+          To add it to the toc, use:
+
+          \begin{lstlisting}
+            \setcounter{tocdepth}{5}
+          \end{lstlisting}
+
+\section{Positioning}\label{positioning}
+
+  \begin{center}
+    center environment
+
+    center environment
+  \end{center}
+
+  {\centering
+    centering group
+
+    centering group: only works for single paragraphs
+  }
+
+  \begin{flushright}
+    flushright environment
+
+    flushright environment
+  \end{flushright}
+
+  TODO why does it not work?
+
+  {\flushright flushright group}
+
+  \subsection{Left and right at the same time}
+
+    \begin{minipage}[t]{0.5\textwidth}
+      \flushleft
+      left1
+
+      left2
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.5\textwidth}
+      \flushright
+      right1
+
+      right2
+    \end{minipage}
+
+  \subsection{Wrap}\label{wrap}
+
+    hfill float right:
+
+    left \hfill float right \\
+    left \hfill float right \\
+
+  \begin{boxedminipage}{\textwidth}
+    Multiple paragraphs
+
+    with a border.
+  \end{boxedminipage}
+
+  \section{vspace}\label{wrap}
 
     vspace 1cm
 
@@ -215,482 +312,486 @@
 
     vspace 1cm
 
-\section{Sections}\label{secSec}
+  textwidth = width of the page where text can be (no margins)
 
-    \subsection{Subsection}\label{secSsec}
+\section{Formulas}\label{formulas}
 
-        \subsubsection{Subsubsection}\label{secSssec}
+  \begin{example}[Unumbered formula]\label{expFor2}
+    \inOut{
+      \begin{equation*}\label{eqFor2}
+        \dot{x} = f(x,u)
+      \end{equation*}
+    }
+  \end{example}\hrule
 
-            \paragraph{Paragraph}
+  \begin{example}[Numbered formula]\label{expFor1}
+    \inOut{
+      \begin{equation}\begin{aligned}\label{eqFor1}
+        \dot{x} = f(x,u)
+      \end{aligned}\end{equation}
+    }
+  \end{example}\hrule
 
-                \begin{remark} \label{rem-paragraph}
-                    Paragraph comes after subsubsection.
+  \subsection{Align at mulitple points}\label{alignMult}
+    Can be done with alignat:
 
-                    To add a label and numbering to it, use:
+      \begin{alignat*}{3}
+        & a + b && = c   && = c2 \\
+        & d   && = e + f && = f2
+      \end{alignat*}
 
-                    \begin{lstlisting}
-                        \setcounter{secnumdepth}{4}
-                    \end{lstlisting}
+  \begin{remark}\label{remFor1} Why I use equation + aligned by default
+    There are simpler ways to write the equation such as backslash square brackets \textbackslash{}[\ldots\textbackslash{}],
+    but if you use those you will soon notice that you will waste a long time modifying equations
+    either to make them multiline, or to give them numbers, so it is just better to always use
+    equation + aligned unless you have a reason not to do so.
+  \end{remark}\hrule
 
-                    To add it to the toc, use:
-
-                    \begin{lstlisting}
-                        \setcounter{tocdepth}{4}
-                    \end{lstlisting}
-
-                \end{remark}\hrule
-
-                \subparagraph{Subparagraph}
-
-                    \begin{remark} \label{rem-subparagraph}
-                        Subparagraph comes after paragraph.
-
-                        To add a label and numbering to it, use:
-
-                        \begin{lstlisting}
-                            \setcounter{secnumdepth}{5}
-                        \end{lstlisting}
-
-                        To add it to the toc, use:
-
-                        \begin{lstlisting}
-                            \setcounter{tocdepth}{5}
-                        \end{lstlisting}
-
-                    \end{remark}\hrule
-
-                    \subparagraph{Paragraph}
-
-                    \begin{remark} \label{paragraph}
-                        Paragraph comes after subsubsection.
-
-                        To add a label to it, use \setcounter{secnumdepth}{4}
-                    \end{remark}\hrule
-
-                    \begin{remark} \label{remSec1}
-                        With t
-
-                        If you feel the need to do so, try and split your current document into two.
-                    \end{remark}\hrule
-
-\section{Formulas}\label{secForm}
-
-    \begin{example}[Unumbered formula] \label{expFor2}
-
-        \inOut{
-            \begin{equation*}\label{eqFor2}
-                \dot{x} = f(x,u)
-            \end{equation*}
-        }
-
-    \end{example}\hrule
-
-    \begin{example}[Numbered formula] \label{expFor1}
-
-        \inOut{
-            \begin{equation}\begin{aligned}\label{eqFor1}
-                \dot{x} = f(x,u)
-            \end{aligned}\end{equation}
-        }
-
-    \end{example}\hrule
-
-    \begin{example}[Align at mulitple points] \label{alignMult}
-
-        Can be done with alignat:
-
-        \inOut{
-            \begin{alignat*}{3}
-                & a + b && = c      && = c2 \\
-                & d     && = e + f  && = f2
-            \end{alignat*}
-        }
-
-    \end{example}\hrule
-
-    \begin{remark}\label{remFor1} Why I use equation + aligned by default
-
-        There are simpler ways to write the equation such as backslash square brackets \textbackslash{}[\ldots\textbackslash{}],
-        but if you use those you will soon notice that you will waste a long time modifying equations
-        either to make them multiline, or to give them numbers, so it is just better to always use
-        equation + aligned unless you have a reason not to do so.
-
-    \end{remark}\hrule
-
-\subsection{Cases}\label{cases}
-
-    case function definition
-
+  \subsection{Cases}\label{cases}
+    Case function definition:
     \begin{equation}
-        f(x) =
-        \begin{cases}
-            x & x \le 0 \\
-            -x & x>0
-        \end{cases}
+      f(x) =
+      \begin{cases}
+        x & x \le 0 \\
+        -x & x>0
+      \end{cases}
     \end{equation}
 
-\section{Figures}\label{secTab}
+\section{Floats}\label{floats}
 
-    figures, images, graphics
+  Floats are objects like tables or images that cannot be split across pages.
+  Therefore, they may be displaced by LaTeX which can put text before them to
+  not leave empty space.
 
-    see figure \ref{fig-label}
+  Since floats may have floated around, always refer to them via reference label pairs,
+  like Float~\ref{float1}, \emph{never} as ``The next float''.
 
-    \begin{figure}[htb]
-        \centering
-        \includegraphics[width=5cm]{image.png}
-        \caption{caption here}
-        \label{fig-label}
-    \end{figure}
+  \begin{table}
+    \begin{tabular}{cc}
+      1 \\ 1 \\ 1 \\ 1 \\ 1 \\
+    \end{tabular}
+    \caption{float1}
+    \label{float1}
+  \end{table}
 
-    allowed formats:
+  Don't worry too much about float positioning in early development: only think about
+  it when you are almost done and the document won't be changing too much.
 
-    \begin{itemize}
-        \item png
-        \item jpg
-    \end{itemize}
+  Different options can increase the probability that floats won't float around too much.
+  It may be a good idea to initially develop with \lstinline|[!htbp]| to see text close to floats
+  and only remove it latter if needed. Table~\ref{floatHtpb} uses those options.
 
-    non-allowed formats:
+  \begin{table}
+    \begin{tabular}{cc}
+      !htbp \\ !htbp \\ !htbp \\ !htbp \\ !htbp \\
+    \end{tabular}
+    \caption{floatHtpb}
+    \label{floatHtpb}
+  \end{table}
 
-    \begin{itemize}
-        \item gif
-    \end{itemize}
+  The float package offers the option \lstinline|H| which fixes the float at a position without reflow no matter what.
 
-    You can append to the figure search apth with the package \lstinline|graphicx| and the command \lstinline|\graphicspath|:
+  TODO, what does each character mean exactly?
 
-    \begin{lstlisting}
-        \usepackage{graphicx}
+  \begin{itemize}
+    \item \lstinline|!|
+    \item \lstinline|h|
+    \item \lstinline|t|
+    \item \lstinline|b|
+    \item \lstinline|p|
+  \end{itemize}
 
-        \graphicspath{ {./media/}{/usr/share/latex/img/} }
-    \end{lstlisting}
+  SE thread: \url{http://tex.stackexchange.com/questions/2275/keeping-tables-figures-close-to-where-they-are-mentioned}
 
-    Relative paths are taken relative to current directory.
+\section{Figures}\label{figures}
 
-    You can only use the \lstinline|\graphicspath| command once! Newer calls will erase the older ones.
+  Figures, images, graphics.
 
-%    Test media-gen:
+  See Figure~\ref{fig-label}.
+
+  \begin{figure}[htb]
+    \includegraphics[width=5cm]{image.png}
+    \caption{caption here}
+    \label{fig-label}
+  \end{figure}
+
+  Allowed formats:
+
+  \begin{itemize}
+    \item PNG
+    \item JPG
+  \end{itemize}
+
+  Non-allowed formats:
+
+  \begin{itemize}
+    \item GIF
+  \end{itemize}
+
+  You can append to the figure search path with the package \lstinline|graphicx| and the command \lstinline|\graphicspath|:
+
+  \begin{lstlisting}
+    \usepackage{graphicx}
+
+    \graphicspath{{./media/}{/usr/share/latex/img/}}
+  \end{lstlisting}
+
+  Relative paths are taken relative to current directory.
+
+  You can only use the \lstinline|\graphicspath| command once! Newer calls will erase the older ones.
+
+%  Test media-gen:
 %
-%        \begin{figure}[htb]
-%            \centering
-%            \includegraphics[width=5cm]{media-gen.png}
-%            \caption{caption here}
-%            \label{fig-label}
-%        \end{figure}
+%    \begin{figure}[htb]
+%      \includegraphics[width=5cm]{media-gen.png}
+%      \caption{caption here}
+%      \label{fig-label}
+%    \end{figure}
 
-\section{Include external pdf}\label{extPdf}
+  \subsection{wrapfigure}\label{wrapfigure}%#float images
 
-The following page shall be taken from an external pdf:
+    wrapfigure from wrapfig package allows images to float right around text.
+    Images float only around text that comes after them.
 
-\includepdf[pagecommand=\thispagestyle{plain}]{image.pdf}
+    a \\ a \\ a \\ a\\ a \\ a \\ a \\ a \\ a\\ a \\
 
-TODO: how to show the page number and make a label / hyperref to it?
-<http://tex.stackexchange.com/questions/25105/unable-to-link-to-inserted-pages-with-pdfpages>
+    \begin{wrapfigure}{r}{0.5\textwidth}
+      \includegraphics[height=2cm]{image.png}
+      \caption{Floating chick B}
+    \end{wrapfigure}
 
-\section{Tables}\label{secTab}
+    b \\ b \\ b \\ b\\ b \\ b \\ b \\ b \\ b\\ b \\
+    b \\ b \\ b \\ b\\ b \\ b \\ b \\ b \\ b\\ b \\
 
-    \begin{example} \label{expTab1}
-        Table \ref{tab1} is a simple table. Note how it may have floated around, so I must refer to it as table \ref{tab1}.
-        \inOut{
-            \begin{table}[h]
-                \centering
-                \begin{tabular}{ccc}
-                    h1 & h2 & h3 \\
-                    \hline
-                    1 & 2 & 3 \\
-                    4 & 5 & 6 \\
-                    7 & 8 & 9 \\
-                \end{tabular}
-                \caption{caption}
-                \label{tab1}
-            \end{table}
-        }
-    \end{example}\hrule
+    \begin{wrapfigure}{r}{0.5\textwidth}
+      \includegraphics[height=2cm]{image.png}
+      \caption{Floating chick C}
+    \end{wrapfigure}
 
-    \begin{remark} \label{remTab1}
-        The [h] means that the table should stay at current position (here) if possible, and not float around the page if possible.
-    \end{remark}\hrule
+    c \\ c \\ c \\ c\\ c \\ c \\ c \\ c \\ c\\ c \\
+    c \\ c \\ c \\ c\\ c \\ c \\ c \\ c \\ c\\ c \\
 
-    \begin{remark} \label{remTab2}
-        For complex tables with label LABEL, create a LABEL.ods spreadsheet with same name as the label and use it to make the table, then copy paste to the .tex.
-    \end{remark}\hrule
+    \begin{wrapfigure}{l}{0.5\textwidth}
+      \includegraphics[height=2cm]{image.png}
+      \caption{Floating chick D}
+    \end{wrapfigure}
 
-    \begin{remark} \label{remTab3}
-        As with any other float (object that can change its position on the page to fit to content), always reference table labels when talking about tables, and never use expressions such as "the table" or "next table".
-    \end{remark}\hrule
+    d \\ d \\ d \\ d\\ d \\ d \\ d \\ d \\ d\\ d \\
+    d \\ d \\ d \\ d\\ d \\ d \\ d \\ d \\ d\\ d \\
 
-    \begin{example}[column formatting] \label{expTab2}
-        This is how you format individual table columns with \lstinline|\usepackage{array}|:
-        \inOut{
-            \begin{table}[h]
-                \centering
-                \begin{tabular}{    l c rp{1cm} p{1cm} >{\bf}c >{\it}c | c || c @{ abc } c c}
-                    1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
-                    1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
-                \end{tabular}
-            \end{table}
-        }
-    \end{example}\hrule
+    \begin{wrapfigure}{r}{5cm}
+      \begin{flushleft}
+        Floating
 
-    Line breaks in a table:
+        Paragraphs
 
-    \begin{tabular}{ l l }
+        E
+      \end{flushleft}
+    \end{wrapfigure}
+
+    TODO: how to remove top margin?
+
+    e \\ e \\ e \\ e\\ e \\ e \\ e \\ e \\ e\\ e \\
+    e \\ e \\ e \\ e\\ e \\ e \\ e \\ e \\ e\\ e \\
+
+    Does not work one to left one to right:
+
+    \begin{wrapfigure}{l}{0.3\textwidth}
+        Floating
+
+        Paragraphs
+
+        l
+    \end{wrapfigure}
+
+    \begin{wrapfigure}{r}{0.5\textwidth}
+        Floating
+
+        Paragraphs
+
+        r
+    \end{wrapfigure}
+
+\clearpage
+
+\section{Tables}\label{table}
+
+  Table~\ref{table1} is a simple table.
+
+  \begin{table}[!htpb]
+    \begin{tabular}{ccc}
+      h1 & h2 & h3 \\
+      \hline
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9 \\
+    \end{tabular}
+    \caption{table1}
+    \label{table1}
+  \end{table}
+
+  For complex tables with label LABEL, create a LABEL.ods spreadsheet with same name as the label and use it to make the table, then copy paste to the tex.
+
+  As with any other float (object that can change its position on the page to fit to content), always reference table labels when talking about tables, and never use expressions such as "the table" or "next table".
+
+  Table~\ref{table-format} shows how to format individual table columns with \lstinline|\usepackage{array}|.
+
+  \begin{table}[!htpb]
+    \begin{tabular}{l c rp{1cm} p{1cm} >{\bf}c >{\it}c | c || c @{abc} c c}
+      1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
+      1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
+    \end{tabular}
+    \caption{table-format}
+    \label{table-format}
+  \end{table}
+
+  \subsection{Break line inside table cell}\label{break-line-inside-table-cell}
+
+    SE question: \url{http://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell}
+
+    The best solution we have found so far it is to use \lstinline|tabularx| and \lstinline|\newline|.
+    as in Table~\ref{table-break-tabularx}. \emph{Warning}: for tabularx to work, you \emph{must}
+    have an \lstinline|X| column!
+
+    \begin{table}[!htpb]
+      \begin{tabularx}{\textwidth}{lX}
+          a & a \newline
+              b \\
+          a & a \newline
+              b \\
+      \end{tabularx}
+      \caption{table-break-tabularx}
+      \label{table-break-tabularx}
+    \end{table}
+
+    TODO how to get it automatically centered? floatrow does not work on it: \url{http://tex.stackexchange.com/questions/89166/centering-in-tabularx-and-x-columns}
+
+    Table~\ref{table-break} shows how to format individual table columns without any extra packages:
+
+    \begin{table}[!htpb]
+      \begin{tabular}{l l}
         a & \begin{tabular}[t]{@{}l@{}} a \\ b \end{tabular} \\
         \hline
         a & \begin{tabular}[c]{@{}l@{}} a \\ b \end{tabular} \\
         \hline
         a & \begin{tabular}[b]{@{}l@{}} a \\ b \end{tabular} \\
         \hline
+      \end{tabular}
+      \caption{table-break}
+      \label{table-break}
+    \end{table}
+
+  \subsection{Fixed width cell}\label{fixed-width-cell}
+
+    \begin{tabular}{>{}m{10cm} | l}
+      10cm default align & col2
     \end{tabular}
 
-\section{Comments}\label{secCom}
+    \begin{tabular}{>{\centering}m{10cm} | l}
+      10cm center & col2
+    \end{tabular}
 
-    \begin{example} \label{expCom1}
-        %\inOut{
-            Next line will be commented out, and therefore invisible to output.
-            \begin{comment}
-            This line was commented off.
-            \end{comment}
-        %}
-    \end{example}\hrule
+    \begin{tabular}{>{}m{10cm} | l}
+      10cm center & col2
+    \end{tabular}
 
-\section{Computer code}\label{code}
+\section{Include external PDF}\label{include-external-pdf}
 
-    \begin{remark} \label{remCode1}
-        Use:
-        \begin{lstlisting}
-            \usepackage{lstlisting}
-        \end{lstlisting}
-    \end{remark}\hrule
+  The following page shall be taken from an external PDF:
 
-    \begin{example} \label{expLst1}
-        This is how you use it:
-        %\inOut{
-            \begin{lstlisting}
-                if i in is:
-                        echo i
-                else:
-                        echo -i
-            \end{lstlisting}
-        %}
-    \end{example}\hrule
+  \includepdf[pagecommand=\thispagestyle{plain}]{image.pdf}
 
-    \begin{example} \label{expLst2}
-        Inline listings:
+  TODO: how to show the page number and make a label / hyperref to it? <http://tex.stackexchange.com/questions/25105/unable-to-link-to-inserted-pages-with-pdfpages>
 
-        %\inOut{
-            the function \lstinline|func_f(void a)| is useful
-        %}
-    \end{example}\hrule
+\section{Comments}\label{comments}
 
-    You can set properties for the entire document by using \lstinline|lstset| in the header.
-    Sample usage:
+    Next line will be commented out, and therefore invisible to output.
+    \begin{comment}
+    This line was commented off.
+    \end{comment}
+
+\section{Verbatim}\label{verbatim}
+
+  Regular text.
+
+  Block:
+
+  \begin{verbatim}
+  a
+    b
+c
+  \end{verbatim}
+
+  Inline \verb|~| tilde.
+
+  There is no way to indent verbatim relative to its containing environment, but it can be done with \lstinline|lstlisting|.
+  \url{http://tex.stackexchange.com/questions/164993/indent-content-of-verbatim-lstlisting-environment-relative-to-containing-envir#164999}
+
+\section{Computer code}\label{computer-code}
+
+  Use:
+
+  \begin{lstlisting}
+    \usepackage{lstlisting}
+  \end{lstlisting}
+
+  This is how you use it:
+
+  \begin{lstlisting}
+    if i in is:
+        echo i
+    else:
+        echo -i
+  \end{lstlisting}
+
+  Inline listings: \lstinline|func_f(void a)| is a function.
+
+  You can set properties for the entire document by using \lstinline|lstset| in the header.
+  Sample usage:
+
+  \begin{lstlisting}
+    \lstset{
+      %language=C,               % Code langugage
+      basicstyle=\ttfamily,          % Code font, Examples.
+      %commentstyle=\color{gray},       % Comments font
+      %numbers=left,              % Line nums position
+      %numberstyle=\tiny,           % Line-numbers fonts
+      %stepnumber=1,              % Step between two line-numbers
+      %numbersep=5pt,             % How far are line-numbers from code
+      %backgroundcolor=\color{lightlightgray}, % Choose background color
+      %frame=none,               % A frame around the code
+      %tabsize=4,               % Default tab size
+      %captionpos=b,              % Caption-position = bottom
+      %breaklines=true,            % Automatic line breaking?
+      %breakatwhitespace=false,        % Automatic breaks only at whitespace?
+      %showspaces=false,            % Dont make spaces visible
+      %showtabs=false,             % Dont make tabls visible
+      %columns=flexible,            % Column format
+      %keywordstyle=\color{OliveGreen},    % Keywords font ('*' = uppercase)
+      %morekeywords={__global__, __device__}, % CUDA specific keywords
+    }
+  \end{lstlisting}
+
+  Bad defaults which you should correct are:
+
+  \begin{itemize}
+    \item use the package \lstinline|upquote| so that quotation marks will appear
+      correctly as ASCII characters: \lstinline|"'`|
+    \item use the option \lstinline|basicstyle=\ttfamily| allows outputs monospace fonts:
+      \begin{lstlisting}
+        mmmmmmmmm
+        iiiiiiiii
+      \end{lstlisting}
+    \item Use the \lstinline|literate={~} {$\sim$}{1}| option so that ASCII tildes can be used.
+      \url{http://tex.stackexchange.com/questions/17266/how-to-insert-a-nice-tilde-in-a-lstlisting}
+    \item TODO how to copy paste correct code from PDF? paste is always full of spaces.
+  \end{itemize}
+
+\section{References}\label{references}
+
+  \lstinline|\label| refers to the smallest surrounding thing that is numbered,
+  typically a section or a theorem environment.
+  Therefore, if you simply put a label in a point paragraph,
+  you don't normally get a link to that point of paragraph like you would in an HTML anchor.
+
+  For HTML ID compatibility, use hyphen separation: def-a-definition-was-here.
+
+  \begin{example} \label{expRef1}
+    The next ref aims at the current example: \ref{expRef1}.
+  \end{example}
+
+  It is a good idea not to leave spaces between \lstinline|labels|.
+
+  The floatrow package is a must: \lstinline|\usepackage{floatrow}| automatically centers all floats.
+
+\section{Hyperlinks and URLs}\label{hyperlinks-urls}
+
+  External links:
+
+  \url{http://www.wikibooks.org}
+
+  \href{http://www.wikibooks.org}{wikibooks home}
+
+  Relative links:
+
+  \url{./index.pdf}
+
+  \href{./index.pdf}{link to index.pdf}
+
+  Inner links in document:
+
+  \hypertarget{label}{target caption}
+
+  \hyperlink{label}{link caption}
+
+  \section{variables and conditional compilation}
 
     \begin{lstlisting}
-        \lstset{
-            %language=C,                             % Code langugage
-            basicstyle=\ttfamily,                   % Code font, Examples.
-            %commentstyle=\color{gray},              % Comments font
-            %numbers=left,                           % Line nums position
-            %numberstyle=\tiny,                      % Line-numbers fonts
-            %stepnumber=1,                           % Step between two line-numbers
-            %numbersep=5pt,                          % How far are line-numbers from code
-            %backgroundcolor=\color{lightlightgray}, % Choose background color
-            %frame=none,                             % A frame around the code
-            %tabsize=4,                              % Default tab size
-            %captionpos=b,                           % Caption-position = bottom
-            %breaklines=true,                        % Automatic line breaking?
-            %breakatwhitespace=false,                % Automatic breaks only at whitespace?
-            %showspaces=false,                       % Dont make spaces visible
-            %showtabs=false,                         % Dont make tabls visible
-            %columns=flexible,                       % Column format
-            %keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
-            %morekeywords={__global__, __device__},  % CUDA specific keywords
-        }
-    \end{lstlisting}
+      \def\mycmd{1}
 
-    Bad defaults which you should correct are:
-
-    \begin{itemize}
-
-        \item use the package \lstinline|upquote| so that quotation marks will appear
-            correctly as ASCII characters: \lstinline|"'`|
-
-        \item use the option \lstinline|basicstyle=\ttfamily| allows outputs monospace fonts:
-
-            \begin{lstlisting}
-                mmmmmmmmm
-                iiiiiiiii
-            \end{lstlisting}
-
-        \item Use the \lstinline|literate={~} {$\sim$}{1}| option so that ASCII tildes can be used.
-            \url{http://tex.stackexchange.com/questions/17266/how-to-insert-a-nice-tilde-in-a-lstlisting}
-
-        \item TODO how to copy paste correct code from PDF? paste is always full of spaces.
-
-    \end{itemize}
-
-\section{References}\label{secRef}
-
-    \begin{remark} \label{remLab1}
-        \textbackslash{}label refers to the smallest surrounding thing that is numbered, typically a section or a theorem environment. Therefore, if you simply put a label in a point paragraph, you don't normally get a link to that point of paragraph like you would in an html anchor.
-    \end{remark}\hrule
-
-    \begin{remark} \label{remLab2}
-        For url compatibility hyphen separation is a good idea: def-a-definition-was-here.
-    \end{remark}\hrule
-
-    \begin{example} \label{expRef1}
-        \inOut{
-            The next ref aims at this example.
-
-            Ref: \ref{expRef1}
-        }
-    \end{example}
-
-\section{Hyperlinks and urls}\label{hyperlinks-urls}
-
-    external links:
-
-    \url{http://www.wikibooks.org}
-
-    \href{http://www.wikibooks.org}{wikibooks home}
-
-    relative links:
-
-    \url{./index.pdf}
-
-    \href{./index.pdf}{link to index.pdf}
-
-    inner links in document:
-
-    \hypertarget{label}{target caption}
-
-    \hyperlink{label}{link caption}
-
-    \section{variables and conditional compilation}
-
-    \begin{lstlisting}
-        \def\mycmd{1}
-
-        \ifx\mycmd\undefined
-            undefed
+      \ifx\mycmd\undefined
+        undefed
+      \else
+        \if\mycmd1
+          defed, 1
         \else
-            \if\mycmd1
-                defed, 1
-            \else
-                defed
-            \fi
+          defed
         \fi
+      \fi
 
-        \def\mycmd{0}
+      \def\mycmd{0}
 
-        \ifx\mycmd\undefined
-            undefed
+      \ifx\mycmd\undefined
+        undefed
+      \else
+        \if\mycmd1
+          defed, 1
         \else
-            \if\mycmd1
-                defed, 1
-            \else
-                defed
-            \fi
+          defed
         \fi
+      \fi
     \end{lstlisting}
 
 \section{Quotations}\label{quotations}
 
-    From \cite{Aa00}:
+  From \cite{Aa00}:
 
-    \begin{quote}
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-        Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
-    \end{quote}
+  \begin{quote}
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+    Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
+  \end{quote}
 
-    quotations:
-        for use with longer quotations, of more than one paragraph, because it indents the first line of each paragraph.
+  Quotations: for use with longer quotations, of more than one paragraph,
+  because it indents the first line of each paragraph.
 
-    verse:
-        is for quotations where line breaks are important, such as poetry. Once in, new stanzas are created with a blank line, and new lines within a stanza are indicated using the newline command, \\. If a line takes up more than one line on the page, then all subsequent lines are indented until explicitly separated with \\.
+  Verse: is for quotations where line breaks are important, such as poetry.
+  Once in, new stanzas are created with a blank line, and new lines within
+  a stanza are indicated using the newline command.
 
-\section{Synctex}\label{synctex}
-
-    Allows forward and backward searches: give a tex line, and find the corresponding pdf page to view it or the inverese.
-
-    It is quite painful to use it sometimes, and the docs are not very good, but it is the only solution.
-
-    Usage:
-
-    \begin{lstlisting}
-        synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"
-    \end{lstlisting}
-
-    Concrete example:
-
-    \begin{lstlisting}
-        synctex "10:1:rel/path/to/a.tex" -o "path/rel/to/a.pdf"
-    \end{lstlisting}
-
-    Sample output (in case of success):
-
-    \begin{lstlisting}
-        This is SyncTeX command line utility, version 1.2
-        SyncTeX result begin
-        Output:_build/index.pdf
-        Page:8
-        x:155.464050
-        y:112.982956
-        h:89.292244
-        v:117.964276
-        W:416.691071
-        H:16.936472
-        before:
-        offset:0
-        middle:
-        after:
-        Output:_build/index.pdf
-        Page:8
-        x:75.942314
-        y:129.803223
-        h:32.863045
-        v:132.227466
-        W:46.068058
-        H:9.090909
-        before:
-        offset:0
-        middle:
-        after:
-        SyncTeX result end
-    \end{lstlisting}
-
-    You must then parse that output to get the value you want.
-    POSIX sh example of how to parse to get the page:
-
-    \begin{lstlisting}
-        SYNCTEX_OUT="`synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"`"
-        echo "SYNCTEX_OUT" | awk -F: '$1 ~/Page/ { print $2; exit }
-    \end{lstlisting}
+  If a line takes up more than one line on the page, then all subsequent lines
+  are indented until explicitly separated with \lstinline|\\|.
 
 \section{Citations and bibliography}\label{secCit}
 
-    The best way is to use bibtex.
+  The best way is to use bibtex
 
-    \begin{example} \label{expCite1}
-        \inOut{One \cite{Aa01} Two \cite{LL01}}
-    \end{example}\hrule
+  \begin{itemize}
+    \item Aa00: \cite{Aa00}
+    \item Aa01: \cite{Aa01}
+  \end{itemize}
 
-    \begin{remark} \label{remCite1}
-        You have to cite a reference before it appears in the bibliography
-    \end{remark}\hrule
+  You have to cite a reference before it appears in the bibliography
 
-    \begin{remark} \label{remCite2}
-        In the bibliography command, use the same name as your .bib file.
-    \end{remark}\hrule
+  In the bibliography command, use the same name as your .bib file.
 
 \section{Bibliography}\label{secBib}
 
-    \newpage
-    \bibliography{index}
+  \newpage
+  \bibliography{index}
 
 \end{document}

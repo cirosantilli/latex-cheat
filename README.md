@@ -17,7 +17,54 @@ Most important files:
 
 - [src/index.tex](src/index.tex): main cheat
 
-#distributions
+#TeX
+
+Read now: <http://en.wikipedia.org/wiki/TeX>
+
+Both name of:
+
+- an executable `tex` which is capable of compiling `tex` input into `dvi`.
+- the language that this executable understands.
+
+LaTeX a library built on top of TeX.
+
+One major design goal of LaTeX is to separate content from form, as TeX itself is very low level.
+
+The base TeX system understands about 300 commands, called primitives, which are rarely used by end users.
+
+TeX uses the extremely non practical method of counting Pi digit as version numbers. The latest version as of 2014-03 is `3.14159265`, that is 9 digits, released updated 2014-01-12.
+
+Knuth says that the base should change as little as possible, and that:
+
+> The absolutely final change (to be made after my death)" will be to change the version number to Pi, at which point all remaining bugs will become features.
+
+##Implementation
+
+TeX source code location: <http://tex.stackexchange.com/questions/111332/how-to-compile-the-source-code-of-tex>
+
+The original source was in the WEB language, <http://en.wikipedia.org/wiki/WEB>, created by Knuth himself, so compiling it is messy.
+
+This has then been translated to C, and the C result is today called web2c, which is the basis for most LaTeX distributions.
+
+#Standards
+
+TODO where is LaTeX specified? Is it standardized by an organization, or just book based like early C?
+
+##Versions
+
+- `LaTeX2e`: is the latest stable release of `LaTeX`, and as of 2014-03, this is what most people mean when they say `LaTeX`.
+- `LaTeX3`: not stable new version, which promises to:
+
+    - offer more built-in functionality through a standard library to rely less on plugins.
+
+    Project website: <http://latex-project.org/latex3.html>
+
+Useful SE questions:
+
+- <http://tex.stackexchange.com/questions/13541/difference-between-latex-latex2e-latex3>
+- <http://tex.stackexchange.com/questions/953/why-is-latex3-taking-so-long-to-come-out>
+
+#Distributions
 
 The easiest way to get started with LaTeX is by using a distribution that packs up everything you need.
 
@@ -54,7 +101,97 @@ The main ways to install it are:
 
 The full install takes 3-4 hours, ~ 2.5GB on the compressed ISO. Some install methods can install many packages which install only parts of TeX Live, but we think its not worth it: just get the entire package and save yourself future headaches with missing packages later on.
 
-#sty search path
+###Internals
+
+You can get the 14Gb source at:
+
+    svn co svn://tug.org/texlive/trunk
+
+It contains:
+
+- 4Gb of precompiled binaries for many different architectures under `/bin`, including precompiled `tex` and `pdflatex`.
+- the source code for many other utils that must be compiled such as `zip` and `wget`.
+
+##MacTeX
+
+Most common Mac TeX distribution. TeX Live based, with Mac only additions.
+
+##MiKTeX
+
+Most common Windows distribution.
+
+##proTeXt
+
+Includes MiKTeX and other things, such as the TeXstudio editor.
+
+It used to contain the TeXnicCenter editor.
+
+#utilities
+
+##pdflatex
+
+Compiles LaTeX files into PDFs.
+
+TeX Live 2013 symlinks `latex` to it.
+
+###error messages
+
+**Very Important**!
+
+LaTeX stdout default output is overly verbose and chaotic, making it very hard to find errors.
+
+There however is a simple but non obvious at first sight convention:
+
+> errors that prevent compilation are marked with an exclamation mark `!` at the beginning of the line, followed by l.XXX indicating the line.
+
+For example if you forget to use a package with a line like:
+
+    The command \asdfqwer is undefined, and this line is very very very very very very very long.
+
+The error will look like:
+
+    ! Undefined control sequence.
+    l.266   The command \asdfqwer
+                                is undefined, and this line is very very very ...
+
+See how the line breaks at the column of the error.
+
+So you know that the problem is at line 266, around `\asdfqwer`.
+
+The line number does not need to be the line immediately following the exclamation point.
+
+For example, if you forget to supply macro parameters:
+
+    \label
+
+The error will look something like:
+
+    ! Paragraph ended before \label was complete.
+    <to be read again>
+                    \par
+    l.267
+
+meaning that the error occurred around line 267.
+
+####filter only errors
+
+- <http://tex.stackexchange.com/questions/27878/pdflatex-bash-script-to-supress-all-output-except-error-messages/165514#165514>
+- <http://stackoverflow.com/questions/1037927/run-pdflatex-quietly>
+
+My best option so far:
+
+    pdflatex a.tex | perl -0777 -ne 'print m/\n! .*?\nl\.\d.*?\n.*?\n/gs'
+
+###warning messages
+
+###TODO
+
+What are:
+
+- `<to be read again>`
+- `overfull hbox`
+
+###sty search path
 
 For a single user first find:
 
@@ -101,15 +238,89 @@ It may be necessary to update package database with:
 
 texmf stands for Tex Meta Fonts. My guess: an historical name that was a path for fonts which was extended to `.sty` files.
 
-#texmaker editor
+###Environment variables
 
-Easy to user LaTeX editor:
+- `TEXINPUTS`: colon separated list of directories under which LaTeX will search for all kinds of inputs, including LaTeX files and images.
+
+Example:
+
+    env TEXINPUTS=./media//:~/tex/:
+
+Note that:
+
+- you can give paths relative to the current directory with a dot as in: `./media//`
+- you can give paths relative the home directory with a tilde as in: `~/tex/`
+- a double trailing slash as in `./media//` means: search recursively under `./media/`
+- a trailing colon at the end of the entire variable as in `~/.tex/:` means: append after the default search path.
+
+##synctex
+
+Allows forward and backward searches: give a TeX line, and find the corresponding PDF page to view it or the inverse.
+
+It is quite painful to use it sometimes, and the docs are not very good, but it is the only solution.
+
+Usage:
+
+    synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"
+
+Concrete example:
+
+    synctex "10:1:rel/path/to/a.tex" -o "path/rel/to/a.pdf"
+
+Sample output (in case of success):
+
+    This is SyncTeX command line utility, version 1.2
+    SyncTeX result begin
+    Output:_build/index.pdf
+    Page:8
+    x:155.464050
+    y:112.982956
+    h:89.292244
+    v:117.964276
+    W:416.691071
+    H:16.936472
+    before:
+    offset:0
+    middle:
+    after:
+    Output:_build/index.pdf
+    Page:8
+    x:75.942314
+    y:129.803223
+    h:32.863045
+    v:132.227466
+    W:46.068058
+    H:9.090909
+    before:
+    offset:0
+    middle:
+    after:
+    SyncTeX result end
+
+You must then parse that output to get the value you want.
+
+POSIX sh example of how to parse to get the page:
+
+    SYNCTEX_OUT="`synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"`"
+    echo "SYNCTEX_OUT" | awk -F: '$1 ~/Page/ { print $2; exit }
+
+##blatexml
+
+Convert LaTeX to MathML.
+
+#Editors
+
+##Texmaker
+
+Easy to use open source cross platform LaTeX editor. Qt based. Good choice for beginners:
 
     sudo aptitude install -y texmaker
 
-#blatexml
+##TeXnicCenter
 
-Convert LaTeX to MathML.
+Popular Windows only open source editor, can use either MiKTeX or TeX Live.
+
+Used to be included in the proTeXt distribution, but was recently replaced by 
 
 #TODO
 
