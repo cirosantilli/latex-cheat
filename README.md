@@ -1,21 +1,14 @@
-Cheats and information on LaTeX.
+LaTeX information and cheatsheets.
 
 Compiled output files found at: <http://cirosantilli.uphero.com/latex-cheat/>
 
 If you are looking for a template, see <https://github.com/cirosantilli/latex-template>. It was used to make this repo.
 
-This relies on the submodule <https://github.com/cirosantilli/latex-submodule> for boilerplate, so clone with the recursive flags:
+Relies on the submodule <https://github.com/cirosantilli/latex-submodule> for boilerplate.
 
-    git clone --recursive https://github.com/cirosantilli/latex-cheat
+See the documentation of the submodule for additional installation instructions.
 
-and if you forgot it do afterwards:
-
-    git submodule init
-    git submodule update
-
-See the documentation of that submodule for additional installation instructions.
-
-Most important files:
+Most important files of this repo:
 
 - [src/index.tex](src/index.tex): main cheat
 
@@ -111,16 +104,16 @@ You can get the 14Gb source at:
 
 It contains:
 
-- 4Gb of precompiled binaries for many different architectures under `/bin`, including precompiled `tex` and `pdflatex`.
+- 4 GiB of precompiled binaries for many different architectures under `/bin`, including precompiled `tex` and `pdflatex`.
 - the source code for many other utils that must be compiled such as `zip` and `wget`.
 
 ##MacTeX
 
-Most common Mac TeX distribution. TeX Live based, with Mac only additions.
+Most popular Mac TeX distribution. TeX Live based, with Mac only additions.
 
 ##MiKTeX
 
-Most common Windows distribution.
+Most popular Windows distribution.
 
 ##proTeXt
 
@@ -128,7 +121,7 @@ Includes MiKTeX and other things, such as the TeXstudio editor.
 
 It used to contain the TeXnicCenter editor.
 
-#utilities
+#Utilities
 
 ##pdflatex
 
@@ -136,7 +129,7 @@ Compiles LaTeX files into PDFs.
 
 TeX Live 2013 symlinks `latex` to it.
 
-###error messages
+###Error messages
 
 **Very Important**!
 
@@ -144,7 +137,7 @@ LaTeX stdout default output is overly verbose and chaotic, making it very hard t
 
 There however is a simple but non obvious at first sight convention:
 
-> errors that prevent compilation are marked with an exclamation mark `!` at the beginning of the line, followed by l.XXX indicating the line.
+> errors that prevent compilation are marked with an exclamation mark `!` at the beginning of the line, followed by `l.XXX` indicating the line.
 
 For example if you forget to use a package with a line like:
 
@@ -175,16 +168,22 @@ The error will look something like:
 
 meaning that the error occurred around line 267.
 
-####filter only errors
+####Filter only errors
 
 - <http://tex.stackexchange.com/questions/27878/pdflatex-bash-script-to-supress-all-output-except-error-messages/165514#165514>
 - <http://stackoverflow.com/questions/1037927/run-pdflatex-quietly>
 
-My best option so far:
+Best no external dependencies one liner option:
 
     pdflatex a.tex | perl -0777 -ne 'print m/\n! .*?\nl\.\d.*?\n.*?\n/gs'
 
-###warning messages
+Best external dependencies option (TeX Live but not yet in 2013 ISO):
+
+    http://mirror.ibcp.fr/pub/CTAN/support/texfot/
+
+Basically a super advanced heuristic regex filtering script.
+
+###Warning messages
 
 ###TODO
 

@@ -314,26 +314,33 @@
 
   textwidth = width of the page where text can be (no margins)
 
-\section{Formulas}\label{formulas}
+\section{Formulas}\label{formulas} %#equations
 
-  \begin{example}[Unumbered formula]\label{expFor2}
-    \inOut{
-      \begin{equation*}\label{eqFor2}
-        \dot{x} = f(x,u)
-      \end{equation*}
-    }
-  \end{example}\hrule
+  TeX style inline $x^2$ equation.
 
-  \begin{example}[Numbered formula]\label{expFor1}
-    \inOut{
-      \begin{equation}\begin{aligned}\label{eqFor1}
-        \dot{x} = f(x,u)
-      \end{aligned}\end{equation}
-    }
-  \end{example}\hrule
+  LaTeX style inline \(x^2\) equation.
 
-  \subsection{Align at mulitple points}\label{alignMult}
-    Can be done with alignat:
+  TeX style displayed (block) equation:
+
+  $$x^2$$
+
+  LaTeX style displayed equation:
+
+  \[ x^2 \]
+
+  Unnumbered equation:
+
+  \begin{equation*}
+    \dot{x} = f(x,u)
+  \end{equation*}
+
+  Numbered formula:
+
+  \begin{equation}\begin{aligned}\label{eqFor1}
+    \dot{x} = f(x,u)
+  \end{aligned}\end{equation}
+
+  Align at multiple points:
 
       \begin{alignat*}{3}
         & a + b && = c   && = c2 \\
@@ -347,15 +354,19 @@
     equation + aligned unless you have a reason not to do so.
   \end{remark}\hrule
 
-  \subsection{Cases}\label{cases}
-    Case function definition:
-    \begin{equation}
-      f(x) =
-      \begin{cases}
-        x & x \le 0 \\
-        -x & x>0
-      \end{cases}
-    \end{equation}
+  Case function definition:
+
+  \begin{equation}
+    f(x) =
+    \begin{cases}
+      x & x \le 0 \\
+      -x & x>0
+    \end{cases}
+  \end{equation}
+
+  Large parenthesis around fraction with \lstinline|\left| and \lstinline|\right|:
+
+  \[ \left(\frac{df}{dt}\right) \]
 
 \section{Floats}\label{floats}
 
@@ -594,6 +605,12 @@
     \begin{tabular}{>{}m{10cm} | l}
       10cm center & col2
     \end{tabular}
+
+\section{Include external TeX files}\label{include}
+
+  There are two commands that achieve this effect: include and input.
+
+  Difference: \url{http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include}.
 
 \section{Include external PDF}\label{include-external-pdf}
 
