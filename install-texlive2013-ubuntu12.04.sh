@@ -18,8 +18,6 @@ sudo mount -t iso9660 -o ro,loop,noauto texlive2013.iso /media/texlive2013
 echo i | sudo /media/texlive2013/install-tl
 sudo umount /media/texlive2013
 sudo rmdir /media/texlive2013
-# If you are done with it for good:
-#rm texlive2013.iso
 
 # Downloader install. Less reliable since if one package fails all halts.
   # Slower because downloads multiple files.
