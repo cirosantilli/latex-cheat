@@ -14,24 +14,11 @@ Most important files of this repo:
 
 # TeX
 
-Read now: <http://en.wikipedia.org/wiki/TeX>
+LaTeX is a TeX library.
 
-Both name of:
+This cheat shall focus on LaTeX from high level point of view.
 
-- an executable `tex` which is capable of compiling `tex` input into `dvi`.
-- the language that this executable understands.
-
-LaTeX a library built on top of TeX.
-
-One major design goal of LaTeX is to separate content from form, as TeX itself is very low level.
-
-The base TeX system understands about 300 commands, called primitives, which are rarely used by end users.
-
-TeX uses the extremely non practical method of counting Pi digit as version numbers. The latest version as of 2014-03 is `3.14159265`, that is 9 digits, released updated 2014-01-12.
-
-Knuth says that the base should change as little as possible, and that:
-
-> The absolutely final change (to be made after my death)" will be to change the version number to Pi, at which point all remaining bugs will become features.
+For a TeX cheatsheet see: <https://github.com/cirosantilli/tex-cheat>
 
 ## Implementation
 
@@ -47,10 +34,9 @@ TODO where is LaTeX specified? Is it standardized by an organization, or just bo
 
 ## Versions
 
-- `LaTeX2e`: is the latest stable release of `LaTeX`, and as of 2014-03, this is what most people mean when they say `LaTeX`.
-- `LaTeX3`: not stable new version, which promises to:
+-   `LaTeX2e`: is the latest stable release of `LaTeX`, and as of 2014-03, this is what most people mean when they say `LaTeX`.
 
-    - offer more built-in functionality through a standard library to rely less on plugins.
+-   `LaTeX3`: unstable new version, which promises to offer more built-in functionality through a standard library to rely less on plugins.
 
     Project website: <http://latex-project.org/latex3.html>
 
@@ -98,13 +84,13 @@ The full install takes 3-4 hours, ~ 2.5GB on the compressed ISO. Some install me
 
 ### Internals
 
-You can get the 14Gb source at:
+You can get the 14 GB source at:
 
     svn co svn://tug.org/texlive/trunk
 
 It contains:
 
-- 4 GiB of precompiled binaries for many different architectures under `/bin`, including precompiled `tex` and `pdflatex`.
+- 4 GB of precompiled binaries for many different architectures under `/bin`, including precompiled `tex` and `pdflatex`.
 - the source code for many other utils that must be compiled such as `zip` and `wget`.
 
 ## MacTeX
@@ -233,7 +219,7 @@ It may be necessary to update package database with:
 
     sudo texhash
 
-texmf stands for Tex Meta Fonts. My guess: an historical name that was a path for fonts which was extended to `.sty` files.
+`texmf` stands for Tex Meta Fonts. My guess: an historical name that was a path for fonts which was extended to `.sty` files.
 
 ### Environment variables
 

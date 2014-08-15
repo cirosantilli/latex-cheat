@@ -103,6 +103,8 @@
   \end{abstract}
   \newpage
 
+\section{Special Characters}
+
 \section{Symbols}\label{symbols}
 
   \begin{itemize}
@@ -146,12 +148,13 @@
       Recommended before \lstinline|\ref| and object type: \lstinline|Table\ref{tab1}|.
 
     \item ellipsis:
-    \begin{itemize}
-      \item  \ldots   - horizontally at bottom of line
-      \item  $\cdots$ - horizontally center of line (math mode only)
-      \item  $\ddots$ - diagonal (math mode only)
-      \item  $\vdots$ - vertical (math mode only)
-    \end{itemize}
+
+      \begin{itemize}
+        \item  \ldots   - horizontally at bottom of line
+        \item  $\cdots$ - horizontally center of line (math mode only)
+        \item  $\ddots$ - diagonal (math mode only)
+        \item  $\vdots$ - vertical (math mode only)
+      \end{itemize}
 
     \item international:
 
@@ -168,8 +171,7 @@
 
     \item Vector arrow: $\vec{F}$
 
-    \item
-      Arrow with text above from amsmath:
+    \item Arrow with text above from amsmath:
 
         $A\xrightarrow{x^2}B$
 
@@ -354,7 +356,7 @@
     but if you use those you will soon notice that you will waste a long time modifying equations
     either to make them multiline, or to give them numbers, so it is just better to always use
     equation + aligned unless you have a reason not to do so.
-  \end{remark}\hrule
+  \end{remark}
 
   Case function definition:
 
@@ -529,6 +531,8 @@
 
 \section{Tables}\label{table}
 
+  TODO how to avoid specifying the alignments \lstinline|\begin{l c}| and use a default? It is not DRY since it repeats the number of column information, and it is style instead of semantics.
+
   Table~\ref{table1} is a simple table.
 
   \begin{table}[!htpb]
@@ -543,7 +547,7 @@
     \label{table1}
   \end{table}
 
-  For complex tables with label LABEL, create a LABEL.ods spreadsheet with same name as the label and use it to make the table, then copy paste to the tex.
+  For complex tables with label \lstinline|LABEL|, create a \lstinline|LABEL.ods| spreadsheet with same name as the label and use it to make the table, then copy paste to the TeX.
 
   As with any other float (object that can change its position on the page to fit to content), always reference table labels when talking about tables, and never use expressions such as "the table" or "next table".
 
@@ -558,13 +562,26 @@
     \label{table-format}
   \end{table}
 
+  \subsection{Header}\label{table-header}
+
+    There is no default semantic macro for the header like in HTML: people usually simply define inline styles. But that can only be done for an entire row with \lstinline|tabu| + \lstinline|rowfont| and not with \lstinline|tabular|. This is so horrendous that I'd rather not have the header, or at most just an \lstinline|hline| as in table~\ref{table-header-hline}.
+
+    \begin{table}
+      \begin{tabular}{ll}
+        a & b \\
+        \hline
+        1 & 2 \\
+        3 & 4
+      \end{tabular}
+      \caption{table-format}
+      \label{table-header-hline}
+    \end{table}
+
   \subsection{Break line inside table cell}\label{break-line-inside-table-cell}
 
     SE question: \url{http://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell}
 
-    The best solution we have found so far it is to use \lstinline|tabularx| and \lstinline|\newline|.
-    as in Table~\ref{table-break-tabularx}. \emph{Warning}: for tabularx to work, you \emph{must}
-    have an \lstinline|X| column!
+    The best solution we have found so far it is to use \lstinline|tabularx| and \lstinline|\newline|. as in Table~\ref{table-break-tabularx}. \emph{Warning}: for \lstinline|tabularx| to work, you \emph{must} have an \lstinline|X| column!
 
     \begin{table}[!htpb]
       \begin{tabularx}{\textwidth}{lX}
@@ -665,29 +682,42 @@ c
 
   Inline listings: \lstinline|func_f(void a)| is a function.
 
+  Set the language: TODO not highlighting. Why?
+
+  \begin{lstlisting}[language=Python]
+    def f(x):
+      return x + 1
+  \end{lstlisting}
+
+  \begin{lstlisting}[language=Ruby]
+    def f(x)
+      x + 1
+    end
+  \end{lstlisting}
+
   You can set properties for the entire document by using \lstinline|lstset| in the header.
   Sample usage:
 
   \begin{lstlisting}
     \lstset{
-      %language=C,               % Code langugage
-      basicstyle=\ttfamily,          % Code font, Examples.
-      %commentstyle=\color{gray},       % Comments font
-      %numbers=left,              % Line nums position
-      %numberstyle=\tiny,           % Line-numbers fonts
-      %stepnumber=1,              % Step between two line-numbers
-      %numbersep=5pt,             % How far are line-numbers from code
+      %language=C,                             % Code langugage
+      basicstyle=\ttfamily,                    % Code font, Examples.
+      %commentstyle=\color{gray},              % Comments font
+      %numbers=left,                           % Line nums position
+      %numberstyle=\tiny,                      % Line-numbers fonts
+      %stepnumber=1,                           % Step between two line-numbers
+      %numbersep=5pt,                          % How far are line-numbers from code
       %backgroundcolor=\color{lightlightgray}, % Choose background color
-      %frame=none,               % A frame around the code
-      %tabsize=4,               % Default tab size
-      %captionpos=b,              % Caption-position = bottom
-      %breaklines=true,            % Automatic line breaking?
-      %breakatwhitespace=false,        % Automatic breaks only at whitespace?
-      %showspaces=false,            % Dont make spaces visible
-      %showtabs=false,             % Dont make tabls visible
-      %columns=flexible,            % Column format
-      %keywordstyle=\color{OliveGreen},    % Keywords font ('*' = uppercase)
-      %morekeywords={__global__, __device__}, % CUDA specific keywords
+      %frame=none,                             % A frame around the code
+      %tabsize=4,                              % Default tab size
+      %captionpos=b,                           % Caption-position = bottom
+      %breaklines=true,                        % Automatic line breaking?
+      %breakatwhitespace=false,                % Automatic breaks only at whitespace?
+      %showspaces=false,                       % Dont make spaces visible
+      %showtabs=false,                         % Dont make tabls visible
+      %columns=flexible,                       % Column format
+      %keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+      %morekeywords={__global__, __device__},  % CUDA specific keywords
     }
   \end{lstlisting}
 
@@ -797,20 +827,19 @@ c
 
 \section{Citations and bibliography}\label{secCit}
 
-  The best way is to use bibtex
+  The best way is to use BibTeX.
 
   \begin{itemize}
     \item Aa00: \cite{Aa00}
     \item Aa01: \cite{Aa01}
   \end{itemize}
 
-  You have to cite a reference before it appears in the bibliography
+  You have to cite a reference before it appears in the bibliography.
 
-  In the bibliography command, use the same name as your .bib file.
+  In the bibliography command, use the same name as your \lstinline|.bib| file.
 
 \section{Bibliography}\label{secBib}
 
-  \newpage
   \bibliography{index}
 
 \end{document}
