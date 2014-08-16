@@ -2,18 +2,24 @@
 
 \title{LaTeX Cheatsheet}
 \author{author name}
-%\date{01/01/2000}                        % if commented out, uses today's date
+% If commented out, uses today's date
+%\date{01/01/2000}
 
 \usepackage{shared}
 
-%\usepackage[top=2in, bottom=1.5in, left=1in, right=1in]{geometry}  % set margins
-%\usepackage[margin=1in]{geometry}                                  % set all margins to the same value
+% Set margins.
+%\usepackage[top=2in, bottom=1.5in, left=1in, right=1in]{geometry}
+% Set all margins to the same value
+%\usepackage[margin=1in]{geometry}
 
 \usepackage{boxedminipage}
-\usepackage[a4paper]{geometry}            % A5 output. You should use this always for e reader users who have small screens (ereaders)
+% A5 output. You should use this always for e-reader users who have small screens.
+\usepackage[a4paper]{geometry}
 \usepackage{pdfpages}
-\usepackage[notref,notcite]{showkeys}     % shows labels. Use labels with at most 7 chars or you fall off pdf in A5 kindle friendly mode
-\usepackage{tabularx}         % Break line inside table cell: http://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+% Show labels. Use labels with at most 7 chars or you fall off PDF in A5 kindle friendly mode.
+\usepackage[notref,notcite]{showkeys}
+% Break line inside table cell: http://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+\usepackage{tabularx}
   % TODO get centering working
   %\usepackage{ragged2e}       % Center all tabularx: http://tex.stackexchange.com/questions/89166/centering-in-tabularx-and-x-columns
   %\renewcommand\tabularxcolumn[1]{>{\Centering}p{#1}}
@@ -109,17 +115,15 @@
 
   \begin{itemize}
 
-    \item TeX and LaTeX logos. Good for tests: \TeX \LaTeX
-
     \item underscore:
 
-      verb: \verb|a_b|
+      Verb: \verb|a_b|.
 
       Backslash: a\_b
 
     \item sharp / hash / number sign:
 
-      verb: \verb|#|
+      Verb: \verb|#|.
 
       Backslash: \#
 
@@ -131,7 +135,7 @@
 
       Center the tilde vertically: \url{http://tex.stackexchange.com/questions/312/correctly-typesetting-a-tilde}
 
-      textasciitilde: Xx \textasciitilde
+      \lstinline|\textasciitilde|: \textasciitilde
 
       verb: \verb|~|
 
@@ -180,6 +184,8 @@
         $A\xxrightarrow{x^1}[x^2]{x^3}B$
 
         $A\xxrightarrow{1000}{1}A$
+
+    \item TeX and LaTeX logos. Good for tests: \TeX \LaTeX
   \end{itemize}
 
 \section{Font}\label{font}
@@ -318,7 +324,31 @@
 
   textwidth = width of the page where text can be (no margins)
 
-\section{Formulas}\label{formulas} %#equations
+  \subsection{Paragraph indentation}\label{paragraph-indentation}
+
+    By default, all paragraphs are indented, except the first one after a section. This is a typographical convention \url{http://tex.stackexchange.com/questions/39227/no-indent-in-the-first-paragraph-in-a-section}.
+
+    To also indent the first paragraph after sections, use \lstinline|\usepackage{indentfirst}|.
+
+    To remove the indent of all paragraphs, set \lstinline|\setlength{\parindent}{0cm}|. \lstinline|parindent| is a TeX primitive.
+
+    To remove the indent of a single paragraph, use:
+
+    \begin{lstlisting}
+      \noindent Paragraph without indent.
+    \end{lstlisting}
+
+    \lstinline|noindent| is a TeX primitive.
+
+  \subsection{setlength vs =}\label{setlength-vs-eq}
+
+    It is possible to set certain variables either as \lstinline|\parskip=3pt| or \lstinline|\letlength{\parskip}{3pt}|.
+
+    The following explains the difference: \url{http://tex.stackexchange.com/questions/6558/what-is-the-right-way-to-set-a-dimension-parameter}
+
+\section{Equations}\label{equations}
+
+\section{Formulas}\label{formulas}
 
   TeX style inline $x^2$ equation.
 
@@ -828,6 +858,10 @@ c
 \section{Citations and bibliography}\label{secCit}
 
   The best way is to use BibTeX.
+  
+  BibTeX just generates the LaTeX built-in format and inserts it at the \lstinline|\bibliography{}| macro.
+
+  The advantage of BibTeX is that you can separated the bibliography from the document and reuse it more easily.
 
   \begin{itemize}
     \item Aa00: \cite{Aa00}
@@ -840,6 +874,6 @@ c
 
 \section{Bibliography}\label{secBib}
 
-  \bibliography{index}
+  \bibliography{main}
 
 \end{document}

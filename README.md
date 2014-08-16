@@ -1,3 +1,5 @@
+# LaTeX Cheat
+
 LaTeX information and cheatsheets.
 
 Compiled output files found at: <http://cirosantilli.uphero.com/latex-cheat/>
@@ -10,9 +12,10 @@ See the documentation of the submodule for additional installation instructions.
 
 Most important files of this repo:
 
-- [src/index.tex](src/index.tex): main cheat
+- [index.tex](index.tex): the main LaTeX cheat.
+- [min.tex](min.tex): minimal LaTeX file. Useful starting point for minimal examples.
 
-# TeX
+## TeX
 
 LaTeX is a TeX library.
 
@@ -20,7 +23,7 @@ This cheat shall focus on LaTeX from high level point of view.
 
 For a TeX cheatsheet see: <https://github.com/cirosantilli/tex-cheat>
 
-## Implementation
+### Implementation
 
 TeX source code location: <http://tex.stackexchange.com/questions/111332/how-to-compile-the-source-code-of-tex>
 
@@ -28,11 +31,11 @@ The original source was in the WEB language, <http://en.wikipedia.org/wiki/WEB>,
 
 This has then been translated to C, and the C result is today called web2c, which is the basis for most LaTeX distributions.
 
-# Standards
+## Standards
 
 TODO where is LaTeX specified? Is it standardized by an organization, or just book based like early C?
 
-## Versions
+### Versions
 
 -   `LaTeX2e`: is the latest stable release of `LaTeX`, and as of 2014-03, this is what most people mean when they say `LaTeX`.
 
@@ -45,13 +48,13 @@ Useful SE questions:
 - <http://tex.stackexchange.com/questions/13541/difference-between-latex-latex2e-latex3>
 - <http://tex.stackexchange.com/questions/953/why-is-latex3-taking-so-long-to-come-out>
 
-# Distributions
+## Distributions
 
 The easiest way to get started with LaTeX is by using a distribution that packs up everything you need.
 
 Some distributions also come with a package manager which automatically downloads sty files as needed.
 
-## TeX Live
+### TeX Live
 
 Most common Linux distribution and recommended on the [LaTeX website](http://latex-project.org/ftp.html). Also works on Windows and Mac OS X.
 
@@ -82,7 +85,7 @@ The main ways to install it are:
 
 The full install takes 3-4 hours, ~ 2.5GB on the compressed ISO. Some install methods can install many packages which install only parts of TeX Live, but we think its not worth it: just get the entire package and save yourself future headaches with missing packages later on.
 
-### Internals
+#### Internals
 
 You can get the 14 GB source at:
 
@@ -93,29 +96,29 @@ It contains:
 - 4 GB of precompiled binaries for many different architectures under `/bin`, including precompiled `tex` and `pdflatex`.
 - the source code for many other utils that must be compiled such as `zip` and `wget`.
 
-## MacTeX
+### MacTeX
 
 Most popular Mac TeX distribution. TeX Live based, with Mac only additions.
 
-## MiKTeX
+### MiKTeX
 
 Most popular Windows distribution.
 
-## proTeXt
+### proTeXt
 
 Includes MiKTeX and other things, such as the TeXstudio editor.
 
 It used to contain the TeXnicCenter editor.
 
-# Utilities
+## Utilities
 
-## pdflatex
+### pdflatex
 
 Compiles LaTeX files into PDFs.
 
 TeX Live 2013 symlinks `latex` to it.
 
-### Error messages
+#### Error messages
 
 **Very Important**!
 
@@ -154,7 +157,7 @@ The error will look something like:
 
 meaning that the error occurred around line 267.
 
-#### Filter only errors
+##### Filter only errors
 
 - <http://tex.stackexchange.com/questions/27878/pdflatex-bash-script-to-supress-all-output-except-error-messages/165514#165514>
 - <http://stackoverflow.com/questions/1037927/run-pdflatex-quietly>
@@ -169,12 +172,12 @@ Best external dependencies option (TeX Live but not yet in 2013 ISO):
 
 Basically a super advanced heuristic regex filtering script.
 
-### Warning messages
+#### Warning messages
 
 - `<to be read again>`: TODO what is it?
 - `overfull hbox`: a single word is too long for the line, and LaTeX does not know how to break it up, e.g.: `AVeryVeryVeryLongClassName`.
 
-### sty search path
+#### sty search path
 
 For a single user first find:
 
@@ -221,7 +224,7 @@ It may be necessary to update package database with:
 
 `texmf` stands for Tex Meta Fonts. My guess: an historical name that was a path for fonts which was extended to `.sty` files.
 
-### Environment variables
+#### Environment variables
 
 - `TEXINPUTS`: colon separated list of directories under which LaTeX will search for all kinds of inputs, including LaTeX files and images.
 
@@ -236,7 +239,7 @@ Note that:
 - a double trailing slash as in `./media//` means: search recursively under `./media/`
 - a trailing colon at the end of the entire variable as in `~/.tex/:` means: append after the default search path.
 
-## synctex
+### synctex
 
 Allows forward and backward searches: give a TeX line, and find the corresponding PDF page to view it or the inverse.
 
@@ -287,15 +290,17 @@ POSIX sh example of how to parse to get the page:
     SYNCTEX_OUT="`synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"`"
     echo "SYNCTEX_OUT" | awk -F: '$1 ~/Page/ { print $2; exit }
 
-## blatexml
+### blatexml
 
 Convert LaTeX to MathML.
 
-## latexmk
+### latexmk
 
-Perl script that runs `latex` the right number of times to get references right, and other useful things.
+Perl script that runs `latex` and `bibtex` the right number of times to get references right.
 
-Implication: the default CLI interface is horrible.
+Implication: the default CLI interface is horrible, and does not do that for you.
+
+This script is a life saver. Use it.
 
 Make DIV:
 
@@ -313,32 +318,30 @@ Same as `-c`, but also remove output files:
 
     latexmk -C
 
-# HTML output
+## HTML output
 
 There are many tools that try to do LaTeX to HTML output, but it is not easy to get it right as it was not designed with reflowable content in mind.
 
 The most realistic approach is to try convert only a subset of LaTeX, which is what <https://github.com/softcover/polytexnic> tries to do.
 
-# Editors
+## Editors
 
-## Texmaker
+### Texmaker
 
 Easy to use open source cross platform LaTeX editor. Qt based. Good choice for beginners:
 
     sudo aptitude install -y texmaker
 
-## TeXnicCenter
+### TeXnicCenter
 
 Popular Windows only open source editor, can use either MiKTeX or TeX Live.
 
 Used to be included in the proTeXt distribution, but was recently replaced by 
 
-# TODO
+## TODO
 
-* how to add hrule after every environment
+-   how to add hrule after every environment
 
-* how to create theorem environments with label (bold Theorem thing at beginning)
-    given in source and not in definition
+-   how to create theorem environments with label (bold Theorem thing at beginning) given in source and not in definition
 
-* how to center all rows in a tabular without specifying how many rows are there
-    ([c] instead of [ccccc], which might change afterwards)
+-   how to center all rows in a tabular without specifying how many rows are there (`[c]` instead of `[ccccc]`, which might change afterwards)
