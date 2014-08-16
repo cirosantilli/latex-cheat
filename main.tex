@@ -229,7 +229,7 @@
 
       \paragraph{Paragraph}\label{paragraph}
 
-          Paragraph comes after subsubsection.
+          Paragraph comes after \lstinline|subsubsection|.
 
           To add a label and numbering to it, use:
 
@@ -561,11 +561,9 @@
 
 \section{Tables}\label{table}
 
-  TODO how to avoid specifying the alignments \lstinline|\begin{l c}| and use a default? It is not DRY since it repeats the number of column information, and it is style instead of semantics.
-
   Table~\ref{table1} is a simple table.
 
-  \begin{table}[!htpb]
+  \begin{table}
     \begin{tabular}{ccc}
       h1 & h2 & h3 \\
       \hline
@@ -583,7 +581,7 @@
 
   Table~\ref{table-format} shows how to format individual table columns with \lstinline|\usepackage{array}|.
 
-  \begin{table}[!htpb]
+  \begin{table}
     \begin{tabular}{l c rp{1cm} p{1cm} >{\bf}c >{\it}c | c || c @{abc} c c}
       1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
       1 & 2 & 3 & 4 & 5 5 5 5 5 & 6 & 7 & 8 & 9 & 10 & 111111111111111111111111111111111111111111111 \\
@@ -605,7 +603,26 @@
       \end{tabular}
       \caption{table-format}
       \label{table-header-hline}
-    \end{table}
+     \end{table}
+
+  \subsection{Avoid specifying column specifiers}\label{table-header}
+
+    TODO how to avoid specifying the column specifiers. It is not DRY since it repeats the number of column information, and it is style instead of semantics.
+
+    Seems not possible neatly: \url{http://tex.stackexchange.com/questions/188589/table-without-column-specification}.
+
+    Best workaround: specify a large number of columns as in Table~\ref{tab-no-specifier}.
+
+    \begin{table}
+      \begin{tabular}{*{9}{l}}
+        a & b \\
+        \hline
+        1 & 2 \\
+        3 & 4
+      \end{tabular}
+      \caption{Table without column specifiers in source.}
+      \label{tab-no-specifier}
+     \end{table}
 
   \subsection{Break line inside table cell}\label{break-line-inside-table-cell}
 
@@ -787,49 +804,53 @@ c
 
   External links:
 
-  \url{http://www.wikibooks.org}
+  \url{http://example.com}
 
-  \href{http://www.wikibooks.org}{wikibooks home}
+  \href{http://example.com}{example.com}
 
   Relative links:
 
   \url{./index.pdf}
 
-  \href{./index.pdf}{link to index.pdf}
+  \href{./index.pdf}{Link to index.pdf.}
 
-  Inner links in document:
+  URL and href with special characters like hash \# without escaping it: \url{http://example.com#id}, \href{http://example.com#id}{href to http://example.com\#id}. In \lstinline|href| works fine for the URL, but fails for the link text, as expected.
+
+  \href{./index.pdf}{Link to index.pdf.}
+
+  Inner links in document with \lstinline|hypertarget| + \lstinline|hyperlink|:
 
   \hypertarget{label}{target caption}
 
   \hyperlink{label}{link caption}
 
-  \section{variables and conditional compilation}
+\section{variables and conditional compilation}
 
-    \begin{lstlisting}
-      \def\mycmd{1}
+  \begin{lstlisting}
+    \def\mycmd{1}
 
-      \ifx\mycmd\undefined
-        undefed
+    \ifx\mycmd\undefined
+      undefed
+    \else
+      \if\mycmd1
+        defed, 1
       \else
-        \if\mycmd1
-          defed, 1
-        \else
-          defed
-        \fi
+        defed
       \fi
+    \fi
 
-      \def\mycmd{0}
+    \def\mycmd{0}
 
-      \ifx\mycmd\undefined
-        undefed
+    \ifx\mycmd\undefined
+      undefed
+    \else
+      \if\mycmd1
+        defed, 1
       \else
-        \if\mycmd1
-          defed, 1
-        \else
-          defed
-        \fi
+        defed
       \fi
-    \end{lstlisting}
+    \fi
+  \end{lstlisting}
 
 \section{Quotations}\label{quotations}
 
@@ -845,32 +866,28 @@ c
     Some quoted text, single paragraph. Some quoted text, single paragraph. Some quoted text, single paragraph.
   \end{quote}
 
-  Quotations: for use with longer quotations, of more than one paragraph,
-  because it indents the first line of each paragraph.
+  Quotations: for use with longer quotations, of more than one paragraph, because it indents the first line of each paragraph.
 
-  Verse: is for quotations where line breaks are important, such as poetry.
-  Once in, new stanzas are created with a blank line, and new lines within
-  a stanza are indicated using the newline command.
+  Verse: is for quotations where line breaks are important, such as poetry. Once in, new stanzas are created with a blank line, and new lines within a stanza are indicated using the newline command.
 
-  If a line takes up more than one line on the page, then all subsequent lines
-  are indented until explicitly separated with \lstinline|\\|.
+  If a line takes up more than one line on the page, then all subsequent lines are indented until explicitly separated with \lstinline|\\|.
 
 \section{Citations and bibliography}\label{secCit}
 
   The best way is to use BibTeX.
-  
-  BibTeX just generates the LaTeX built-in format and inserts it at the \lstinline|\bibliography{}| macro.
+
+  BibTeX just generates the LaTeX built-in format from a \lstinline|.bib| file into a \lstinline|.bbl| file and inserts it at the \lstinline|\bibliography{}| macro.
 
   The advantage of BibTeX is that you can separated the bibliography from the document and reuse it more easily.
+
+  You have to cite a reference before it appears in the bibliography.
+
+  In the bibliography command, use the same name as your \lstinline|.bib| file.
 
   \begin{itemize}
     \item Aa00: \cite{Aa00}
     \item Aa01: \cite{Aa01}
   \end{itemize}
-
-  You have to cite a reference before it appears in the bibliography.
-
-  In the bibliography command, use the same name as your \lstinline|.bib| file.
 
 \section{Bibliography}\label{secBib}
 

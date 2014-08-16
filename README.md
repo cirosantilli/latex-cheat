@@ -2,8 +2,6 @@
 
 LaTeX information and cheatsheets.
 
-Compiled output files found at: <http://cirosantilli.uphero.com/latex-cheat/>
-
 If you are looking for a template, see <https://github.com/cirosantilli/latex-template>. It was used to make this repo.
 
 Relies on the submodule <https://github.com/cirosantilli/latex-submodule> for boilerplate.
@@ -13,7 +11,7 @@ See the documentation of the submodule for additional installation instructions.
 Most important files of this repo:
 
 - [index.tex](index.tex): the main LaTeX cheat.
-- [min.tex](min.tex): minimal LaTeX file. Useful starting point for minimal examples.
+- [min.tex](min.tex):     minimal LaTeX file. Useful starting point for minimal examples.
 
 ## TeX
 
@@ -29,7 +27,7 @@ TeX source code location: <http://tex.stackexchange.com/questions/111332/how-to-
 
 The original source was in the WEB language, <http://en.wikipedia.org/wiki/WEB>, created by Knuth himself, so compiling it is messy.
 
-This has then been translated to C, and the C result is today called web2c, which is the basis for most LaTeX distributions.
+This has then been translated to C, and the C result is today called Web2C, which is the basis for most LaTeX distributions.
 
 ## Standards
 
