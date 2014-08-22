@@ -25,9 +25,11 @@
   %\renewcommand\tabularxcolumn[1]{>{\Centering}p{#1}}
 \usepackage{wrapfig}
 
-%TODO can this work??
-%\newcommand{\inOut}[1]{\begin{verbatim}#1\end{verbatim}#1} %CANT use verbatim here, give up, people will read at source for now!!!
-\newcommand{\inOut}[1]{#1}                %dummy inOut before I can find a nice way to show source and output in one go.
+% TODO can this work? Print both verbatim and code?
+% CANT use verbatim here, give up, people will read at source for now!
+%\newcommand{\inOut}[1]{\begin{verbatim}#1\end{verbatim}#1}
+% Dummy `inOut` before I can find a nice way to show source and output in one go.
+\newcommand{\inOut}[1]{#1}
 
 \begin{document}
 
@@ -111,9 +113,16 @@
 
 \section{Special Characters}
 
-\section{Symbols}\label{symbols}
+  The following 10 special chars have to be escaped because they have a special meaning in TeX.
+
+  All of them can be escaped with \lstinline|verb|, and many, but not all can be escaped with the backslash. Some have a special macro for them.
+
+  In short, pure insanity!
 
   \begin{itemize}
+    \item dollar sign
+
+      Backslash: \$
 
     \item underscore:
 
@@ -121,13 +130,15 @@
 
       Backslash: a\_b
 
+      TODO what is the TeX function?
+
     \item sharp / hash / number sign:
 
       Verb: \verb|#|.
 
       Backslash: \#
 
-      TODO: what it the unescaped meaning?
+      Used for macro parameters.
 
     \item tilde:
 
@@ -137,9 +148,9 @@
 
       \lstinline|\textasciitilde|: \textasciitilde
 
-      verb: \verb|~|
+      Verb: \verb|~|
 
-      If unescaped, is a whitespace at which lines cannot break.
+      Unescaped is a NBSP.
 
       Without tilde:
 
@@ -150,6 +161,11 @@
       mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm~nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn 
 
       Recommended before \lstinline|\ref| and object type: \lstinline|Table\ref{tab1}|.
+  \end{itemize}
+
+\section{Symbols}\label{symbols}
+
+  \begin{itemize}
 
     \item ellipsis:
 
@@ -185,7 +201,7 @@
 
         $A\xxrightarrow{1000}{1}A$
 
-    \item TeX and LaTeX logos. Good for tests: \TeX \LaTeX
+    \item TeX and LaTeX logos. Good for tests: \TeX\ \LaTeX
   \end{itemize}
 
 \section{Font}\label{font}
@@ -350,15 +366,11 @@
 
 \section{Formulas}\label{formulas}
 
-  TeX style inline $x^2$ equation.
+  Most of low level formula stuff is present in \TeX and shall not be discussed here.
 
-  LaTeX style inline \(x^2\) equation.
+  \LaTeX\ style inline \(x^2\) equation.
 
-  TeX style displayed (block) equation:
-
-  $$x^2$$
-
-  LaTeX style displayed equation:
+  \LaTeX\ style displayed equation:
 
   \[ x^2 \]
 
@@ -376,10 +388,10 @@
 
   Align at multiple points:
 
-      \begin{alignat*}{3}
-        & a + b && = c   && = c2 \\
-        & d   && = e + f && = f2
-      \end{alignat*}
+  \begin{alignat*}{3}
+    & a + b && = c   && = c2 \\
+    & d   && = e + f && = f2
+  \end{alignat*}
 
   \begin{remark}\label{remFor1} Why I use equation + aligned by default
     There are simpler ways to write the equation such as backslash square brackets \textbackslash{}[\ldots\textbackslash{}],
@@ -397,10 +409,6 @@
       -x & x>0
     \end{cases}
   \end{equation}
-
-  Large parenthesis around fraction with \lstinline|\left| and \lstinline|\right|:
-
-  \[ \left(\frac{df}{dt}\right) \]
 
 \section{Floats}\label{floats}
 
@@ -674,9 +682,13 @@
 
 \section{Include external TeX files}\label{include}
 
-  There are two commands that achieve this effect: include and input.
+  There are two \LaTeX\ commands that achieve this effect: \lstinline|include| and \lstinline|input|.
+
+  \lstinline|input| is a \TeX\ primitive, \lstinline|include| not.
 
   Difference: \url{http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include}.
+
+  There seems to be no neat way to include an entire directory or use wildcards \url{http://tex.stackexchange.com/questions/13921/inputting-multiple-files-in-latex}
 
 \section{Include external PDF}\label{include-external-pdf}
 
@@ -707,16 +719,11 @@ c
 
   Inline \verb|~| tilde.
 
-  There is no way to indent verbatim relative to its containing environment, but it can be done with \lstinline|lstlisting|.
-  \url{http://tex.stackexchange.com/questions/164993/indent-content-of-verbatim-lstlisting-environment-relative-to-containing-envir#164999}
+  There is no way to indent verbatim relative to its containing environment, but it can be done with \lstinline|lstlisting|. \url{http://tex.stackexchange.com/questions/164993/indent-content-of-verbatim-lstlisting-environment-relative-to-containing-envir#164999}
 
-\section{Computer code}\label{computer-code}
+\section{Computer code listings}\label{computer-code}
 
-  Use:
-
-  \begin{lstlisting}
-    \usepackage{lstlisting}
-  \end{lstlisting}
+  Use \lstinline|\usepackage{lstlisting}|
 
   This is how you use it:
 
@@ -742,8 +749,16 @@ c
     end
   \end{lstlisting}
 
-  You can set properties for the entire document by using \lstinline|lstset| in the header.
-  Sample usage:
+  Set up a caption and label. See Listing~\ref{listing}.
+
+  \begin{lstlisting}[label=listing, caption={Listing with caption and label.}]
+    def f(x):
+      return x + 1
+  \end{lstlisting}
+
+  Frame the code listing with a surrounding box: \url{http://tex.stackexchange.com/questions/14967/source-code-listing-with-frame-around-code}
+
+  You can set properties for the entire document by using \lstinline|lstset| in the header:
 
   \begin{lstlisting}
     \lstset{
@@ -771,28 +786,27 @@ c
   Bad defaults which you should correct are:
 
   \begin{itemize}
-    \item use the package \lstinline|upquote| so that quotation marks will appear
-      correctly as ASCII characters: \lstinline|"'`|
-    \item use the option \lstinline|basicstyle=\ttfamily| allows outputs monospace fonts:
+    \item
+      Use the package \lstinline|upquote| so that quotation marks will appear
+      correctly as ASCII characters: \lstinline|"'`|.
+    \item
+      Use the option \lstinline|basicstyle=\ttfamily| allows outputs monospace fonts:
       \begin{lstlisting}
         mmmmmmmmm
         iiiiiiiii
       \end{lstlisting}
-    \item Use the \lstinline|literate={~} {$\sim$}{1}| option so that ASCII tildes can be used.
-      \url{http://tex.stackexchange.com/questions/17266/how-to-insert-a-nice-tilde-in-a-lstlisting}
+    \item
+      Use the \lstinline|literate={~} {$\sim$}{1}| option so that ASCII tildes can be used. \url{http://tex.stackexchange.com/questions/17266/how-to-insert-a-nice-tilde-in-a-lstlisting}.
     \item TODO how to copy paste correct code from PDF? paste is always full of spaces.
   \end{itemize}
 
 \section{References}\label{references}
 
-  \lstinline|\label| refers to the smallest surrounding thing that is numbered,
-  typically a section or a theorem environment.
-  Therefore, if you simply put a label in a point paragraph,
-  you don't normally get a link to that point of paragraph like you would in an HTML anchor.
+  \lstinline|\label| refers to the smallest surrounding thing that is numbered, typically a section or a theorem environment. Therefore, if you simply put a label in a point paragraph, you don't normally get a link to that point of paragraph like you would in an HTML anchor.
 
   For HTML ID compatibility, use hyphen separation: def-a-definition-was-here.
 
-  \begin{example} \label{expRef1}
+  \begin{example}\label{expRef1}
     The next ref aims at the current example: \ref{expRef1}.
   \end{example}
 
@@ -814,7 +828,7 @@ c
 
   \href{./index.pdf}{Link to index.pdf.}
 
-  URL and href with special characters like hash \# without escaping it: \url{http://example.com#id}, \href{http://example.com#id}{href to http://example.com\#id}. In \lstinline|href| works fine for the URL, but fails for the link text, as expected.
+  \lstinline|url| and \lstinline|href| with special characters like hash \# without escaping it: \url{http://example.com#id}, \href{http://example.com#id}{href to http://example.com\#id}. In \lstinline|href| works fine for the URL, but fails for the link text, as expected.
 
   \href{./index.pdf}{Link to index.pdf.}
 
@@ -824,33 +838,11 @@ c
 
   \hyperlink{label}{link caption}
 
-\section{variables and conditional compilation}
+\section{Variables, conditionals}\label{variables}
 
-  \begin{lstlisting}
-    \def\mycmd{1}
+  Possible with \lstinline|if| and \lstinline|def|. Both are \TeX\ primitives and shall not be commented here.
 
-    \ifx\mycmd\undefined
-      undefed
-    \else
-      \if\mycmd1
-        defed, 1
-      \else
-        defed
-      \fi
-    \fi
-
-    \def\mycmd{0}
-
-    \ifx\mycmd\undefined
-      undefed
-    \else
-      \if\mycmd1
-        defed, 1
-      \else
-        defed
-      \fi
-    \fi
-  \end{lstlisting}
+  You should never use those things on your \LaTeX\ documents: leave them for insane package writers.
 
 \section{Quotations}\label{quotations}
 
@@ -874,7 +866,12 @@ c
 
 \section{Citations and bibliography}\label{secCit}
 
-  The best way is to use BibTeX.
+  \LateX\ has built-in bibliography capabilities which allow you to write the bibliography inline, but the best way is to use BibTeX because:
+
+  \begin{itemize}
+    \item it separates style from data well: you give the data, and multiple output styles are possible
+    \item it is easier to reuse since it is on a separate file (true, you could use \lstinline|input|)
+  \end{itemize}
 
   BibTeX just generates the LaTeX built-in format from a \lstinline|.bib| file into a \lstinline|.bbl| file and inserts it at the \lstinline|\bibliography{}| macro.
 
