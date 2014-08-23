@@ -408,6 +408,8 @@ Sample output (in case of success):
     after:
     SyncTeX result end
 
+TODO what does each field mean? I think `x` and `y` are positions in the page, `h` and `v` the actual rectangle corresponding to the line (tools like Texmaker highlight a rectangle inteligently, not just a point).
+
 You must then parse that output to get the value you want.
 
 POSIX `sh` example of how to parse to get the page:
@@ -419,7 +421,9 @@ Okular can call SyncTeX and parse it's output for you if you give it a special i
 
     okular --unique '/path/to/main.pdf#src:123/path/to/main.tex'
 
-where `123` is the current line number.
+where `123` is the current line number. TODO where is documented?
+
+Highlight exact point in output page for the given input input line on forward searches: not yet possible, feature request at: <https://bugs.kde.org/show_bug.cgi?id=240315>
 
 ### blatexml
 
