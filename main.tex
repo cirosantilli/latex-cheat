@@ -700,10 +700,10 @@
 
 \section{Comments}\label{comments}
 
-    Next line will be commented out, and therefore invisible to output.
-    \begin{comment}
-    This line was commented off.
-    \end{comment}
+  Next line will be commented out, and therefore invisible to output.
+  \begin{comment}
+  This line was commented off.
+  \end{comment}
 
 \section{Verbatim}\label{verbatim}
 
@@ -864,14 +864,18 @@ c
 
   If a line takes up more than one line on the page, then all subsequent lines are indented until explicitly separated with \lstinline|\\|.
 
-\section{Citations and bibliography}\label{secCit}
+\section{Bibliography}
 
-  \LateX\ has built-in bibliography capabilities which allow you to write the bibliography inline, but the best way is to use BibTeX because:
+\section{cite}\label{cite}
+
+  \LaTeX\ has built-in bibliography capabilities which allow you to write the bibliography inline, but the best way is to use BibTeX because:
 
   \begin{itemize}
-    \item it separates style from data well: you give the data, and multiple output styles are possible
-    \item it is easier to reuse since it is on a separate file (true, you could use \lstinline|input|)
+    \item it separates style from data well: you give the data, and multiple output styles are possible.
+    \item it is easier to reuse since it is on a separate file (true, you could use \lstinline|input|).
   \end{itemize}
+
+  Several online sources offer BibTeX items for you to copy and past into your documents, and there are also citation managers which help you find, store and automate the citation process.
 
   BibTeX just generates the LaTeX built-in format from a \lstinline|.bib| file into a \lstinline|.bbl| file and inserts it at the \lstinline|\bibliography{}| macro.
 
@@ -881,13 +885,33 @@ c
 
   In the bibliography command, use the same name as your \lstinline|.bib| file.
 
+  Only items that you explicitly cite will appear on the bibliography by default, so you can use any big \lstinline|bib| file for you project. If you want something to appear on the bibliography without citing it, use \lstinline|\nocite{id}|. For good style, put those commands just before the \lstinline|bibliography| command.
+
   \begin{itemize}
     \item Aa00: \cite{Aa00}
     \item Aa01: \cite{Aa01}
   \end{itemize}
 
+  You can specify the style of the bibliography with the \lstinline|\bibliographystyle{}|  command.
+
+  The \lstinline|natbib| package comes with several common built-in styles.
+
+\section{Index}\label{index}
+
+  \begin{itemize}
+    \item installed in \lstinline|PATH|: \lstinline|makeindex| program. Comes by default with TeX Live 2013, and gets called automatically by \lstinline|latexmk|.
+    \item on the preamble: \lstinline|\usepackage{makeidx}| and \lstinline|\makeindex|
+    \item mention a term on a given position: \lstinline|\index{key}|
+    \item print the index: \lstinline|\printindex|
+  \end{itemize}
+
+  \index{a}
+  \index{b}
+
+  \printindex
+
 \section{Bibliography}\label{secBib}
 
+  \bibliographystyle{plain}
   \bibliography{main}
-
 \end{document}

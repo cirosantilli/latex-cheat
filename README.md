@@ -13,29 +13,15 @@ Most important files of this repo:
 - [index.tex](index.tex): the main LaTeX cheat.
 - [min.tex](min.tex):     minimal LaTeX file. Useful starting point for minimal examples.
 
-## TeX
-
-LaTeX is a TeX library.
-
-This cheat shall focus on LaTeX from high level point of view.
-
-For a TeX cheatsheet see: <https://github.com/cirosantilli/tex-cheat>
-
-### Implementation
-
-TeX source code location: <http://tex.stackexchange.com/questions/111332/how-to-compile-the-source-code-of-tex>
-
-The original source was in the WEB language, <http://en.wikipedia.org/wiki/WEB>, created by Knuth himself, so compiling it is messy.
-
-This has then been translated to C, and the C result is today called Web2C, which is the basis for most LaTeX distributions.
-
 ## Standards
 
 TODO where is LaTeX specified? Is it standardized by an organization, or just book based like early C?
 
 ### Versions
 
--   `LaTeX2e`: is the latest stable release of `LaTeX`, and as of 2014-03, this is what most people mean when they say `LaTeX`.
+-   `LaTeX2e`: is the latest stable release of `LaTeX`, and as of 2014-03, this is what most people mean when they say `LaTeX`, and shall be the focus of this cheat.
+
+    Documentation, including primitives, found at: <http://www.tex.ac.uk/ctan/info/latex2e-help-texinfo/latex2e.html>. No examples unfortunately.
 
 -   `LaTeX3`: unstable new version, which promises to offer more built-in functionality through a standard library to rely less on plugins.
 
@@ -45,6 +31,36 @@ Useful SE questions:
 
 - <http://tex.stackexchange.com/questions/13541/difference-between-latex-latex2e-latex3>
 - <http://tex.stackexchange.com/questions/953/why-is-latex3-taking-so-long-to-come-out>
+
+### TeX
+
+Also called *plain TeX* to emphasize the difference from LaTeX.
+
+One major design goal of LaTeX is to separate content from form, as TeX itself is very low level, and not very useful for end users.
+
+TODO what is the exact relation between TeX and LaTeX?
+
+<http://tex.stackexchange.com/questions/49/what-is-the-difference-between-tex-and-latex>
+
+<http://www.tug.org/levels.html>
+
+<http://tex.stackexchange.com/questions/41031/whats-the-difference-between-pdftex-and-pdflatex>
+
+The LaTeX language is almost TeX language with libraries, but this is not exact: there are TeX commands that are not available in LaTeX: <http://ask.metafilter.com/55266/TeX-LaTeX>
+TODO are there LaTeX commands that are not available in TeX?
+
+LaTeX renames some TeX macros: <http://tex.stackexchange.com/questions/171873/which-primitives-does-latex2e-rename-move>, most of them by adding the @ prefix, e.g. `\@@input`.
+
+This cheat shall focus on LaTeX from high level point of view, and mostly on differences between LaTeX and TeX. TeX specific stuff that works analogously in LaTeX will not be commented upon.
+
+While you can get away with high level only for a while, you need to understand the low level stuff to do things like:
+
+- understand error messages
+- create your own libraries
+
+For a TeX cheatsheet see: <https://github.com/cirosantilli/tex-cheat>
+
+TODO what about output formats? Is it possible to do plain TeX to PDF?
 
 ## Distributions
 
@@ -108,13 +124,114 @@ Includes MiKTeX and other things, such as the TeXstudio editor.
 
 It used to contain the TeXnicCenter editor.
 
+## Variants
+
+LaTeX has spawned several closely related variant libraries / languages, mostly because in certain aspects it sucks hard. Despite it's shortcomings, LaTeX still seems to be the dominant variant, and has the best tool / community support.
+
+Good info: <http://mactex-wiki.tug.org/wiki/index.php/TeX_Variants>
+
+### eTeX
+
+Extends TeX.
+
+### XeTeX
+
+<http://en.wikipedia.org/wiki/XeTeX>
+
+Its main goal is tu support Unicode out of the box.
+
+Comes in TeX Live full.
+
+### LuaTeX
+
+<http://en.wikipedia.org/wiki/LuaTeX>
+
+Supports embedded Lua scripting.
+
+Just great: part of the TeX community wants to replace Perl, it's traditional scripting language, with Lua. Huge improvement! Python, LSB and much more widely used, anyone?
+
+Allows you to do stuff like:
+
+    \documentclass{article}
+    \begin{document}
+    \edef\out{\directlua{
+      j = io.popen(" ls -l")
+      tex.write(j:read("*all"))
+      j:close()
+    }}
+    \out
+    \end{document}
+
+which pastes Lua output into TeX.
+
+Comes in TeX Live full.
+
+### ConTeXt
+
+<http://en.wikipedia.org/wiki/ConTeXt>
+
+Comes in TeX Live full.
+
+## Command line interface
+
+Important options include:
+
+- `-interaction=nonstopmode`: don't stop LaTeX on each error. This is useless since what we really want is to fix the source file in the editor. The problem then becomes that it is hard to find the error messages amidst all the noise. A possible solution is `texfot`.
+
 ## Utilities
 
 ### pdflatex
 
-Compiles LaTeX files into PDFs.
+Compiles LaTeX files into PDFs directly, without going through DVI, thus allowing for better PDF specifics support.
 
 TeX Live 2013 symlinks `latex` to it.
+
+Some packages only work on `pdflatex`. TODO: how are those packages written? Does `pdflatex` have new primitives, or some other mechanism exists?
+
+Some packages implement very PDF specific features, e.g.:
+
+- forms: `hyperref` allows it: <http://tex.stackexchange.com/questions/14842/creating-fillable-pdfs>
+- file embedding: <http://texdoc.net/texmf-dist/doc/latex/attachfile/attachfile.pdf>
+
+### latexmk
+
+Perl script that provides a very good CLI interface to LaTeX Implication: the default CLI interface is horrible.
+
+This script is a life saver. **Use it**.
+
+In TeX Live 2013.
+
+Does important stuff like:
+
+- run `latex` and `bibtex` the right number of times to get references right
+- preview, build on save
+- clean only the generated files
+
+I can't wait for it to incorporate `texfot`.
+
+Make DIV:
+
+    latexmk a.tex
+
+Make PDF:
+
+    latexmk -pdf a.tex
+
+Clean all temporary files like `.aux` and `.log`, but not output files like `.pdf` or `.div`:
+
+    latexmk -c
+
+Same as `-c`, but also remove output files:
+
+    latexmk -C
+
+`-pv`: preview: open output in viewer
+
+`-pvc` (preview continuously): watch and build mode (compile on save with inotify)
+
+Almost any options that `pdflatex` LaTeX and friends accept can be passed to `latexmk` and will be forwarded to `pdflatex`. Some of those may trigger special effects on `latexmk` in addition to being forwarded. The exact list of options can be found with:
+
+    latemk -showextraoptions
 
 #### Error messages
 
@@ -155,16 +272,18 @@ The error will look something like:
 
 meaning that the error occurred around line 267.
 
+##### texfot
+
 ##### Filter only errors
 
 - <http://tex.stackexchange.com/questions/27878/pdflatex-bash-script-to-supress-all-output-except-error-messages/165514#165514>
 - <http://stackoverflow.com/questions/1037927/run-pdflatex-quietly>
 
-Best no external dependencies one liner option:
+Good no external dependencies one liner option:
 
     pdflatex a.tex | perl -0777 -ne 'print m/\n! .*?\nl\.\d.*?\n.*?\n/gs'
 
-Best external dependencies option (TeX Live but not yet in 2013 ISO):
+Best external dependencies option. In TeX Live but not yet in 2013 ISO:
 
     http://mirror.ibcp.fr/pub/CTAN/support/texfot/
 
@@ -237,19 +356,27 @@ Note that:
 - a double trailing slash as in `./media//` means: search recursively under `./media/`
 - a trailing colon at the end of the entire variable as in `~/.tex/:` means: append after the default search path.
 
-### synctex
+### SyncTeX
 
 Allows forward and backward searches: give a TeX line, and find the corresponding PDF page to view it or the inverse.
 
 It is quite painful to use it sometimes, and the docs are not very good, but it is the only solution.
 
-Usage:
+First you must make the compiler produce SyncTeX information with the `-synctex=1` option. This only needs to be done once on the last pass, and can be done through `latexmk`:
+
+    latexmk -synctex=1 main.tex
+
+This will generate a `main.synctex.gz` files which contains the mappings between lines and PDF positions.
+
+Call Synctex with:
 
     synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"
 
 Concrete example:
 
     synctex "10:1:rel/path/to/a.tex" -o "path/rel/to/a.pdf"
+
+Make sure that the output file (PDF) is in the same directory as the `.synctex.gz`: I have not been able to get it to work otherwise: <http://tex.stackexchange.com/questions/109292/how-to-put-synctex-file-in-different-directory-than-pdf-without-segmentation-fau>
 
 Sample output (in case of success):
 
@@ -283,38 +410,20 @@ Sample output (in case of success):
 
 You must then parse that output to get the value you want.
 
-POSIX sh example of how to parse to get the page:
+POSIX `sh` example of how to parse to get the page:
 
     SYNCTEX_OUT="`synctex "$LINE:$COLUMN:$TEX_FILE" -o "$PDF_FILE"`"
     echo "SYNCTEX_OUT" | awk -F: '$1 ~/Page/ { print $2; exit }
 
+Okular can call SyncTeX and parse it's output for you if you give it a special input path of the form:
+
+    okular --unique '/path/to/main.pdf#src:123/path/to/main.tex'
+
+where `123` is the current line number.
+
 ### blatexml
 
 Convert LaTeX to MathML.
-
-### latexmk
-
-Perl script that runs `latex` and `bibtex` the right number of times to get references right.
-
-Implication: the default CLI interface is horrible, and does not do that for you.
-
-This script is a life saver. Use it.
-
-Make DIV:
-
-    latexmk a.tex
-
-Make PDF:
-
-    latexmk -pdf a.tex
-
-Clean all temporary files like `.aux` and `.log`, but not output files like `.pdf` or `.div`:
-
-    latexmk -c
-
-Same as `-c`, but also remove output files:
-
-    latexmk -C
 
 ## HTML output
 
@@ -335,6 +444,13 @@ Easy to use open source cross platform LaTeX editor. Qt based. Good choice for b
 Popular Windows only open source editor, can use either MiKTeX or TeX Live.
 
 Used to be included in the proTeXt distribution, but was recently replaced by 
+
+## Lint tools
+
+<http://tex.stackexchange.com/questions/163/is-there-a-program-equivalent-to-lint-for-latex>
+
+- ChkTeX: <http://www.ctan.org/tex-archive/support/chktex>. Executable: `chktex`.
+- lacheck: <http://www.ctan.org/tex-archive/support/lacheck>
 
 ## TODO
 
