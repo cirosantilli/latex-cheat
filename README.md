@@ -82,7 +82,7 @@ The main ways to install it are:
 
     If you are doing it interactively, downloading via torrent which may be much faster (15 minutes vs 4 hours).
 
--   a package manager. Easiest method, but on Ubuntu, installs 2009 version, which is too outdated.
+-   a distribution package manager. Easiest method, but on Ubuntu, installs 2009 version, which is too outdated.
 
     `texlive-full` is the name of the Ubuntu repo for the TeX Live distro which contains the most packages.
 
@@ -477,6 +477,34 @@ Used to be included in the proTeXt distribution, but was recently replaced by
 
 - ChkTeX: <http://www.ctan.org/tex-archive/support/chktex>. Executable: `chktex`.
 - lacheck: <http://www.ctan.org/tex-archive/support/lacheck>
+
+## CTAN
+
+<http://www.ctan.org/>
+
+De facto standard package index provider.
+
+Package URLs of form: <http://www.ctan.org/pkg/latexmk/>
+
+Contains a web interface for browsing the files in each package under <http://www.ctan.org/tex-archive/>, e.g. <http://www.ctan.org/tex-archive/support/latexmk>.
+
+Does not appear to host version control systems like Git or have pull requests: you have to email patches to the author or find in the docs where he keeps the dev code tracked.
+
+Does not appear to offer fixed versions: only the last thing that was updated by the author, so in theory the latest stable.
+
+All CTAN submissions appear to be human reviewed and categorized into the `tex-archive` tree before inclusion: <http://www.ctan.org/upload>.
+
+## tlmgr
+
+TeX Live package Manager.
+
+Easily download missing packages from the command line.
+
+TODO: where does it finds the packages? CTAN?
+
+TODO: is it possible to fix package versions like in a `Gemfile` file? It not, *never* use this, since if you can't specify versions, it is not possible to reproduce bugs, and bugs may crop up on regressions! Always use a fixed year ISO if that is the case.
+
+It seems that Debian devs are against making it work out of the box so as to not conflict with `apt-get`. I don't understand how this can be considering all the other languages with package managers (Ruby `gem`, Python `pip`, etc.).
 
 ## TODO
 
