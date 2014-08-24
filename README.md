@@ -425,6 +425,28 @@ where `123` is the current line number. TODO where is documented?
 
 Highlight exact point in output page for the given input input line on forward searches: not yet possible, feature request at: <https://bugs.kde.org/show_bug.cgi?id=240315>
 
+### texdoc
+
+Command line tool to access LaTeX documentation files.
+
+Searches some path (TODO which), and opens a compiled PDF output documentations.
+
+The advantage of having PDFs over in terminal man pages is that it is then possible for the manual to contain live examples.
+
+Documents both LaTeX internals and packages.
+
+Get documentation for a package:
+
+    texdoc hyperref
+
+There are also documentation on LaTeX in general:
+
+    texdoc source2e
+    texdoc latex2e
+    texdoc tex
+
+In TeX Live 2013.
+
 ### blatexml
 
 Convert LaTeX to MathML.
@@ -458,8 +480,6 @@ Used to be included in the proTeXt distribution, but was recently replaced by
 
 ## TODO
 
--   how to add hrule after every environment
-
+-   how to add an `hrule` after every environment of a type?
 -   how to create theorem environments with label (bold Theorem thing at beginning) given in source and not in definition
-
 -   how to center all rows in a tabular without specifying how many rows are there (`[c]` instead of `[ccccc]`, which might change afterwards)
